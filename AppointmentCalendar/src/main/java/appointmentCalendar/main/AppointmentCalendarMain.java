@@ -1,4 +1,4 @@
-package appointmentCalendar.test;
+package appointmentCalendar.main;
 
 public class AppointmentCalendarMain {
 

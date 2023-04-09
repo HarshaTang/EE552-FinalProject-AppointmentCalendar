@@ -1,3 +1,4 @@
+package jUnitTest;
 import org.junit.jupiter.api.Test;	// used for testing
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 
