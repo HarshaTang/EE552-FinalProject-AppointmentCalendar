@@ -1,7 +1,7 @@
 /**
  * 
  */
-package appointmentCalendar.base;
+package backEnd;
 
 public class AppointmentScheduler {
 	// TODO: Add code here for making Appointments
