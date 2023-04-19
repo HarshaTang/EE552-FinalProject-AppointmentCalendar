@@ -79,7 +79,7 @@ public class CalendarApp {
 		return this.day;
 	}
 	
-	public String getFullDate() {
+	public String getYearMonthDayDate() {
 		String date = this.year + "/" + this.month + "/" + this.day;
 		
 		return date;
@@ -95,7 +95,7 @@ public class CalendarApp {
 		return this.dayMonthMap;
 	}
 	
-	private List<Map<String, Integer>> getFullCalendar() {
+	public List<Map<String, Integer>> getFullCalendar() {
 		List<Map<String, Integer>> fullCalendarMapList = new ArrayList<Map<String, Integer>>();
 		// Each array index should have the following Map Keys: SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
 		// Each Value for the Key should have a numerical representation. 0 if the Month doesn't have a date for that day. 
@@ -158,7 +158,7 @@ public class CalendarApp {
 	public static void main(String[] args) {
 		CalendarApp sampleCalendar = new CalendarApp();
 		
-		System.out.println("Today's Date: "+sampleCalendar.getFullDate()+"\n");
+		System.out.println("Today's Date: "+sampleCalendar.getYearMonthDayDate()+"\n");
 		
 		// Sample Day of Week Print Outs
 		System.out.println("Sample Day of Week Print Outs:");
