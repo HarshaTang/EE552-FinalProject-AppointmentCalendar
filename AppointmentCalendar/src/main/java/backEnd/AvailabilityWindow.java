@@ -1,6 +1,7 @@
 package backEnd;
 
 import java.time.DateTimeException;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
@@ -9,69 +10,110 @@ public class AvailabilityWindow {
 	
 	private final LocalTime startTime;
 	private final LocalTime endTime;
-	private final int maxSlots;
-	private int reservedSlots;
+	private LinkedHashMap<LocalTime, Boolean> timeWindow;
 	
-	// ArrayList -> contains all slots. 
-	// If a slot has been reserved, that index becomes false -> meaning you can't reserve it
-	// however, if the slot is open, the index is true. -> 
-	LinkedHashMap<LocalTime, Boolean> timeWindow;
+	public AvailabilityWindow(LocalTime startTime, LocalTime endTime) {
+		// initialize variables
+		timeWindow = new LinkedHashMap<LocalTime, Boolean>();
+
+		this.startTime = roundedTime(startTime);
+		this.endTime = roundedTime(endTime);
+		
+		this.timeWindow = generateTimeWindows(this.startTime, this.endTime);
+	}
 	
-	public AvailabilityWindow(LocalTime startTime, LocalTime endTime, int maxSlots) {
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.maxSlots = maxSlots;
-		this.reservedSlots = 0;
+	private LocalTime roundedTime (LocalTime tempTime) {
+		LocalTime newTime = null;
+		
+		// round startTimes/endTimes to nearest 30 minute intervals
+		int inMinutes = tempTime.getMinute();
+		int timeNearestMin = (int) (Math.round(inMinutes/ 30.0)*30);
+		
+		if (timeNearestMin == 60) {
+			newTime = tempTime.withHour(tempTime.getHour()+1).withMinute(0);
+		} else {
+			newTime = tempTime.withMinute(timeNearestMin);
+		}
+		
+		//System.out.println("[Original, After]:\t["+tempTime+", "+newTime+"]");
+		
+		return newTime;
+	}
+	
+	private LinkedHashMap<LocalTime, Boolean> generateTimeWindows(LocalTime startTime, LocalTime endTime) {
+		LinkedHashMap<LocalTime, Boolean> timeWindowSlots = new LinkedHashMap<LocalTime, Boolean>();
+		
+		Duration durationBetweenTimes = Duration.between(startTime, endTime);
+		double hoursDuration = durationBetweenTimes.toMinutes()/60.0;
+		int maxTimeSlots = (int) (hoursDuration * 2);
+		//System.out.println("Hours In-Between: "+hoursDuration+"\tMaxTimeSlots: "+maxTimeSlots);
+		
+		LocalTime tempTime = startTime;
+		for (int i = 0; i < maxTimeSlots; i++) {
+			if (i != 0) {
+				tempTime = tempTime.plusMinutes(30);
+			}
+			timeWindowSlots.put(tempTime, true);
+		}
+		
+		return timeWindowSlots;
+	}
+	
+	public String displayTimeWindows() {
+		StringBuilder sb = new StringBuilder();
+		
+		for (LocalTime b: this.timeWindow.keySet()) {
+			sb.append(formatTimeDisplay(b) + "\t"+this.timeWindow.get(b) + "\n");
+		}
+		
+		return sb.toString();
 	}
 
 	public boolean reserveSlot(LocalTime time) {
+		LocalTime roundedTime = roundedTime(time);
+		
+		// Time is outside the availability window
 		if (time.isBefore(startTime) || time.isAfter(endTime)) {
-			return false; // Time is outside the availability window
+			System.out.println("Your requested time is unavailable!");
+			return false; 
 		} 
-		else if (reservedSlots < maxSlots) {
-			reservedSlots++;
-			return true; // No more slots available
-		} 
+		// Time is within the availability window
 		else {
-			return false;
-		}
+			// check if the time slot exists
+			if (this.timeWindow.get(roundedTime) == true) {
+				System.out.println("Your requested "+roundedTime+" appointment has been scheduled!");
+				timeWindow.put(roundedTime, false);
+				return true;
+			} else {
+				System.out.println("Your requested time is unavailable!");
+				return false;
+			}
+		} 
 	}
 	
+	// TODO delete later
 	public boolean requestOpenSlots() {
-		if (reservedSlots < maxSlots) {
-			return true; 
-		} else {
-			return false;
-		}
+		return false;
 	}
-
+	
+	// TODO delete later
 	public int getRemainingSlots() {		
-		return maxSlots - reservedSlots;
+		return 0;
+	}
+	
+	private String formatTimeDisplay(LocalTime time) {
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+		
+		return timeFormatter.format(time);
 	}
 
 	@Override
 	public String toString() {
-		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-		
-		String formattedStartTime 	= timeFormatter.format(startTime);
-		String formattedEndtime 	= timeFormatter.format(endTime);
-		
-		return formattedStartTime + " - " + formattedEndtime;
-	}
-	
-	public LocalTime getTime(int number) {
-		LocalTime time = null;
-		try {
-			time = LocalTime.of(number, 0);
-		} catch (DateTimeException e) {
-			System.out.println("ERROR! Enter Valid Date: "+e);
-			e.printStackTrace();
-		}
-		return time;
+		return formatTimeDisplay(startTime) + " - " + formatTimeDisplay(endTime);
 	}
 	
 	public static void main(String[] args) {
-		AvailabilityWindow testAvailWindow = new AvailabilityWindow(LocalTime.of(9, 0), LocalTime.of(17, 0), 5);
+		AvailabilityWindow testAvailWindow = new AvailabilityWindow(LocalTime.of(9, 0), LocalTime.of(17, 30));
 		
 		/** ================================================
 		 * 	SAMPLE TEST 1
@@ -79,20 +121,33 @@ public class AvailabilityWindow {
 		 *  ================================================
 		 */
 		System.out.println("Availability Windows Time Range:\t"+testAvailWindow.toString());
+
+		/** ================================================
+		 * 	SAMPLE TEST 2
+		 *  Display Availability Windows - Before Reserve
+		 *  ================================================
+		 */
+		System.out.println("\nDisplay Availability Windows:\n"+testAvailWindow.displayTimeWindows());
 		
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
-		System.out.println(testAvailWindow.reserveSlot(testAvailWindow.getTime(9)));
+		/** ================================================
+		 * 	SAMPLE TEST 3
+		 *  Reserving Time-Slots
+		 *  ================================================
+		 */
+		System.out.println("Reserving Time-Slots");
+		testAvailWindow.reserveSlot(LocalTime.of(9, 0));
+		testAvailWindow.reserveSlot(LocalTime.of(9, 30));
+		testAvailWindow.reserveSlot(LocalTime.of(13, 0));
+		testAvailWindow.reserveSlot(LocalTime.of(15, 30));
+		testAvailWindow.reserveSlot(LocalTime.of(16, 0));
 		
+		/** ================================================
+		 * 	SAMPLE TEST 4
+		 *  Display Availability Windows - After Reserve
+		 *  ================================================
+		 */
+		System.out.println("\nDisplay Availability Windows:\n"+testAvailWindow.displayTimeWindows());
 		
-	
 		
 	}
 
