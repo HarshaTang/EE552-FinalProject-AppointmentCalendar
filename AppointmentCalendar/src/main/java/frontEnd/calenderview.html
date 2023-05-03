@@ -29,6 +29,21 @@
         font-size: 24px;
         margin-bottom: 16px;
       }
+
+      /* Add styles for the time slot table */
+      .time-slots {
+        margin-top: 16px;
+      }
+
+      .time-slots th {
+        background-color: #ddd;
+        color: #333;
+      }
+
+      .time-slots td {
+        background-color: #f5f5f5;
+        color: #333;
+      }
     </style>
   </head>
   <body>
@@ -44,6 +59,16 @@
             <th>Thu</th>
             <th>Fri</th>
             <th>Sat</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- Add a new table for the time slots -->
+      <table class="time-slots">
+        <thead>
+          <tr>
+            <th>Time Slots</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -106,6 +131,67 @@
         // Add the row to the tbody
         tbody.appendChild(row);
       }
-    </script>
-  </body>
-</html>
+</script>
+
+<script>
+  // Define the available time slots
+  const timeSlots = [
+    '9:00 AM',
+    '9:30 AM',
+    '10:00 AM',
+    '10:30 AM',
+    '11:00 AM',
+    '11:30 AM',
+    '12:00 PM',
+    '12:30 PM',
+    '1:00 PM',
+    '1:30 PM',
+    '2:00 PM',
+    '2:30 PM',
+    '3:00 PM',
+    '3:30 PM',
+    '4:00 PM',
+    '4:30 PM',
+    '5:00 PM',
+
+  ];
+
+  // Get the HTML element where the time slots will be displayed
+  const timeSlotDisplay = document.querySelector('.calendar .time-slots');
+
+  // Generate the time slot rows
+  for (let i = 0; i < timeSlots.length; i++) {
+    // Create a new table row element
+    const row = document.createElement('tr');
+
+    // Create a new table cell element for the time slot
+    const timeSlotCell = document.createElement('td');
+    timeSlotCell.innerHTML = timeSlots[i];
+
+    // Add the time slot cell to the row
+    row.appendChild(timeSlotCell);
+
+    // Generate the cells for this row, one for each day of the calendar
+    for (let j = 0; j < 7; j++) {
+      // Create a new table cell element
+      const cell = document.createElement('td');
+
+      // Set the data-date attribute of the cell to the date it represents, in ISO format
+      if (date > daysInMonth) {
+        cell.setAttribute('data-date', '');
+      } else {
+        const isoDate = new Date(year, month, date).toISOString().split('T')[0];
+        cell.setAttribute('data-date', isoDate);
+        date++;
+      }
+
+      // Add the cell to the row
+      row.appendChild(cell);
+    }
+
+    // Add the row to the time slot display element
+    timeSlotDisplay.appendChild(row);
+  }
+</script>
+</body>>
+</html>>
