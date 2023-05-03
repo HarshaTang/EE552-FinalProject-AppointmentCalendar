@@ -189,7 +189,7 @@ public class MonthlyCalendarApp {
 	}
 
 	public static void main(String[] args) {
-		MonthlyCalendarApp sampleCalendar = new MonthlyCalendarApp(2023, 6);
+		MonthlyCalendarApp sampleCalendar = new MonthlyCalendarApp(2023, 4);
 		
 		System.out.println("Today's Year/Month: "+sampleCalendar.getYearMonthDate()+"\n");
 		

@@ -91,6 +91,11 @@ public class AvailabilityWindow {
 		} 
 	}
 	
+	public LocalTime getAvailableTimeSlots() {
+		return null;
+	}
+	
+	
 	// TODO delete later
 	public boolean requestOpenSlots() {
 		return false;
