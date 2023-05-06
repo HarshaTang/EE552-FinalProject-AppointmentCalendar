@@ -28,8 +28,20 @@
             <version>5.7.1</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser-cross-platform</artifactId>
+            <version>7.32</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>com.teamdev</id>
+            <url>https://europe-maven.pkg.dev/jxbrowser/releases</url>
+        </repository>
+    </repositories>
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
