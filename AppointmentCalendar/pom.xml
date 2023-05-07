@@ -34,6 +34,11 @@
             <version>7.32</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser-javafx</artifactId>
+            <version>7.32</version>
+        </dependency>
     </dependencies>
 
     <repositories>
