@@ -37,22 +37,22 @@ class JSONMonthMap {
 
 class JSONDayMap {
 	private long day;
-	private Map<String, Boolean> timeSlots;
+	private Map<String, String> timeSlots;
 	
 	public JSONDayMap (long day) {
 		this.day = day;
-		this.timeSlots = new HashMap<String, Boolean>();
+		this.timeSlots = new HashMap<String, String>();
 	}
 	
 	public long getDay() {
 		return this.day;
 	}
 	
-	public void setTimeSlots(String time, Boolean value) {
-		this.timeSlots.put(time, value);
+	public void setTimeSlots(String time, String text) {
+		this.timeSlots.put(time, text);
 	}
 	
-	public Map<String, Boolean> getTimeSlots() {
+	public Map<String, String> getTimeSlots() {
 		return this.timeSlots;
 	}
 }
@@ -102,7 +102,7 @@ public class JSONReadFile {
 					for (Object time: tO.keySet()) {
 						// get the time and the boolean value and store it
 						String timeStr = (String) time;
-						boolean timeValue = (boolean) tO.get(time);
+						String timeValue = (String) tO.get(time);
 						dayMap.setTimeSlots(timeStr, timeValue);
 					}
 					// add the days to the month map
@@ -168,7 +168,7 @@ public class JSONReadFile {
 		 * 	Set-Up the JSON Reader
 		 *  ================================================
 		 */
-		JSONReadFile jsonData = new JSONReadFile("appointmentsTemplate.json");
+		JSONReadFile jsonData = new JSONReadFile("AppointmentsTemplate_WithText.json");
 		//jsonData.printData();
 		
 		/** ================================================
@@ -199,6 +199,10 @@ public class JSONReadFile {
 		System.out.println(scheduler.displayScheduleOnDay(6));
 		System.out.println("Reading from JSON File - TimeSlots for April 7th:");
 		System.out.println(scheduler.displayScheduleOnDay(7));
+		
+		// TODO: 
+		// Implement a text box 
+		// Implement Edit/Remove options for the schedule
 		
 	}
 

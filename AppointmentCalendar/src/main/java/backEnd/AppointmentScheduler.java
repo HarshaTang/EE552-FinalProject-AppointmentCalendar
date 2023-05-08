@@ -41,21 +41,21 @@ public class AppointmentScheduler {
 		}
 	}
 	
-	public void reserve(int day, LocalTime timeRequest, boolean logSwitch) {
-		this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, logSwitch);
+	public void reserve(int day, LocalTime timeRequest, String text, boolean logSwitch) {
+		this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
 	}
 	
-	public void reserve(int day, int hour, int minute, boolean logSwitch) {
+	public void reserve(int day, int hour, int minute, String text, boolean logSwitch) {
 		LocalTime timeRequest = LocalTime.of(hour, minute);
-		this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, logSwitch);
+		this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
 	}
 	
-	public void reserve(int day, String timeStr, boolean logSwitch) {
+	public void reserve(int day, String timeStr, String text, boolean logSwitch) {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
 		
 		try {
 			LocalTime timeRequest = LocalTime.parse(timeStr, format);
-			this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, logSwitch);
+			this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
 		} catch (Exception e) {
 			System.out.println("ERROR! Wrong time format was entered!");
 			e.printStackTrace();
@@ -72,12 +72,10 @@ public class AppointmentScheduler {
 		for (JSONDayMap day: daysMap) {
 			int dayNumber = Long.valueOf(day.getDay()).intValue();
 			for (String time: day.getTimeSlots().keySet()) {
-				boolean timeValue = day.getTimeSlots().get(time);
+				String text = day.getTimeSlots().get(time);
+				LocalTime timeFormatted = LocalTime.parse(time, format);
+				reserve(dayNumber, timeFormatted, text, logSwitch);
 				
-				if (timeValue == false) {
-					LocalTime timeFormatted = LocalTime.parse(time, format);
-					reserve(dayNumber, timeFormatted, logSwitch);
-				}
 			}
 		}
 	}
@@ -120,12 +118,12 @@ public class AppointmentScheduler {
 		 *  ================================================
 		 */
 		System.out.println("Reserve TimeSlots on April 1st, and Display Calendar:");
-		scheduler.reserve(1, "9:45 AM", true);
-		scheduler.reserve(1, "1:11 PM", true);
-		scheduler.reserve(1, "12:33 PM", true);
-		scheduler.reserve(1, "4:30 PM", true);
-		scheduler.reserve(1, "2:30 PM", true);
-		scheduler.reserve(1, "5:30 PM", true);
+		scheduler.reserve(1, "9:45 AM", null, true);
+		scheduler.reserve(1, "1:11 PM", null, true);
+		scheduler.reserve(1, "12:33 PM", null, true);
+		scheduler.reserve(1, "4:30 PM", null, true);
+		scheduler.reserve(1, "2:30 PM", null, true);
+		scheduler.reserve(1, "5:30 PM", null, true);
 		System.out.println(scheduler.displayScheduleOnDay(1));
 		
 		/** ================================================
