@@ -29,6 +29,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>20</version>
+        </dependency>
+        <dependency>
             <groupId>com.teamdev.jxbrowser</groupId>
             <artifactId>jxbrowser-cross-platform</artifactId>
             <version>7.32</version>
@@ -103,7 +108,14 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>2.22.2</version>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-maven-plugin</artifactId>
+                    <version>0.0.8</version>
+                    <configuration>
+                        <mainClass>HelloFX</mainClass>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
