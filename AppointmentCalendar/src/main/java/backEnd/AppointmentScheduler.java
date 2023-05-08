@@ -40,6 +40,10 @@ public class AppointmentScheduler {
 		}
 	}
 	
+	public int getNumDays() {
+		return this.monthlyCalendarTimeSlots.keySet().size();
+	}
+	
 	public boolean reserve(int day, LocalTime timeRequest, String text, boolean logSwitch) {
 		return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
 	}
