@@ -1,6 +1,5 @@
 package backEnd;
 
-import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -134,19 +133,48 @@ public class AvailabilityWindow {
 		} 
 	}
 	
-	public LocalTime getAvailableTimeSlots() {
-		return null;
-	}
-	
-	
-	// TODO delete later
-	public boolean requestOpenSlots() {
+	public boolean getTimeSlotStatus(LocalTime timeRequest) {
+		// check if the time is in the list
+		if (this.timeWindow.containsKey(timeRequest)) {
+			// if it exists, check the status
+			if (this.timeWindow.get(timeRequest) == true) {
+				return true;
+			} 
+		} 
+		
 		return false;
 	}
 	
-	// TODO delete later
-	public int getRemainingSlots() {		
-		return 0;
+	public String getTimeSlotText(LocalTime timeRequest) {
+		// check if the time is in the list
+		if (this.timeWindowText.containsKey(timeRequest)) {
+			// if it exists, check the status
+			return this.timeWindowText.get(timeRequest);
+		} 
+		
+		return null;
+	}
+	
+	public boolean cancel (LocalTime timeRequest) {
+		if (this.timeWindow.containsKey(timeRequest)) {
+			// if it exists, check the status
+			if (this.timeWindow.get(timeRequest) == false) {
+				this.timeWindow.put(timeRequest, true);
+				this.timeWindowText.put(timeRequest, DEFAULT_TIME_SLOT_TEXT_AVAIL);
+				return true;
+			} 
+		} 
+		return false;
+	}
+	
+	public int getNumberOfAvailableSlots() {
+		int count = 0;
+		for (LocalTime b: this.timeWindow.keySet()) {
+			if (this.timeWindow.get(b) == true) {
+				count++;
+			}
+		}
+		return count;
 	}
 	
 	private String formatTimeDisplay(LocalTime time) {

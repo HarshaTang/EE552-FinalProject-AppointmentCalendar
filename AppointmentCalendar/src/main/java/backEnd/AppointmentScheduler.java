@@ -3,7 +3,6 @@
  */
 package backEnd;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -41,25 +40,22 @@ public class AppointmentScheduler {
 		}
 	}
 	
-	public void reserve(int day, LocalTime timeRequest, String text, boolean logSwitch) {
-		this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
+	public boolean reserve(int day, LocalTime timeRequest, String text, boolean logSwitch) {
+		return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
 	}
 	
-	public void reserve(int day, int hour, int minute, String text, boolean logSwitch) {
-		LocalTime timeRequest = LocalTime.of(hour, minute);
-		this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
-	}
-	
-	public void reserve(int day, String timeStr, String text, boolean logSwitch) {
+	public boolean reserve(int day, String timeStr, String text, boolean logSwitch) {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
 		
 		try {
 			LocalTime timeRequest = LocalTime.parse(timeStr, format);
-			this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
+			return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
 		} catch (Exception e) {
 			System.out.println("ERROR! Wrong time format was entered!");
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
 	
 	public String displayScheduleOnDay(int day) {
@@ -80,17 +76,71 @@ public class AppointmentScheduler {
 		}
 	}
 	
-	/*
-	// Function to reserve the slot
-	public boolean reserveSlot(DayOfWeek dayOfWeek, LocalTime time) {
-		AvailabilityWindow availabilityWindow = availabilityWindows.get(dayOfWeek);
-		if (availabilityWindow == null) {
-			return false; // Availability window not found for the given day
+	public boolean getAvailabilityStatus (int day, String timeStr) {
+		if (this.monthlyCalendarTimeSlots.containsKey(day)) {
+			AvailabilityWindow timeWindow = this.monthlyCalendarTimeSlots.get(day);
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
+			
+			try {
+				LocalTime timeRequest = LocalTime.parse(timeStr, format);
+				return timeWindow.getTimeSlotStatus(timeRequest);
+			} catch (Exception e) {
+				System.out.println("ERROR! Wrong time format was entered!");
+				e.printStackTrace();
+			}
 		}
-		return availabilityWindow.reserveSlot(time);
+		return false;
 	}
-
-	// Do we need this function?
+	
+	public String getAvailabilityText (int day, String timeStr) {
+		if (this.monthlyCalendarTimeSlots.containsKey(day)) {
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
+			AvailabilityWindow timeWindow = this.monthlyCalendarTimeSlots.get(day);
+			
+			try {
+				LocalTime timeRequest = LocalTime.parse(timeStr, format);
+				return timeWindow.getTimeSlotText(timeRequest);
+			} catch (Exception e) {
+				System.out.println("ERROR! Wrong time format was entered!");
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public boolean removeAppointment (int day, String timeStr) {
+		if (getAvailabilityStatus(day, timeStr) == false) {
+			AvailabilityWindow timeWindow = this.monthlyCalendarTimeSlots.get(day);
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
+			
+			try {
+				LocalTime timeRequest = LocalTime.parse(timeStr, format);
+				return timeWindow.cancel(timeRequest);
+			} catch (Exception e) {
+				System.out.println("ERROR! Wrong time format was entered!");
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Appointment cannot be cancelled!");
+		}
+		
+		return false;
+	}
+	
+	public int getNumberOfAvailableSlots (int day) {
+		try {
+			return this.monthlyCalendarTimeSlots.get(day).getNumberOfAvailableSlots();
+			
+		} catch (Exception e) {
+			System.out.println("ERROR! Day doesn't exist!");
+			e.printStackTrace();
+		}
+		
+		return 0;
+		
+	}
+	
+	/*
 	public String getAvailabilityHtml() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<table>\n");
@@ -134,5 +184,29 @@ public class AppointmentScheduler {
 		System.out.println("Showcase TimeSlots on April 2nd (Should be Empty):");
 		System.out.println(scheduler.displayScheduleOnDay(2));
 		
+		/** ================================================
+		 * 	SAMPLE TEST 3
+		 *  Requesting Status of April 1st - 10AM
+		 *  ================================================
+		 */
+		System.out.println("Request Availability Status of April 1st - 10AM: " + scheduler.getAvailabilityStatus(1, "10:00 AM"));
+		
+		/** ================================================
+		 * 	SAMPLE TEST 4
+		 *  Requesting Text of April 1st - 10AM
+		 *  ================================================
+		 */
+		System.out.println("Requesting Text of April 1st - 10AM: " + scheduler.getAvailabilityText(1, "10:00 AM"));
+		
+		/** ================================================
+		 * 	SAMPLE TEST 5
+		 *  Cancel April 1st - 10AM Appointment
+		 *  ================================================
+		 */
+		System.out.println("\nCancel April 1st - 10AM Appointment: ");
+		System.out.println("Number of Available Slots on April 1st [BEFORE]: "+scheduler.getNumberOfAvailableSlots(1));
+		System.out.println("Removed Appointment: "+scheduler.removeAppointment(1, "10:00 AM"));
+		System.out.println("Number of Available Slots on April 1st [AFTER] : "+scheduler.getNumberOfAvailableSlots(1));
+
 	}
 }

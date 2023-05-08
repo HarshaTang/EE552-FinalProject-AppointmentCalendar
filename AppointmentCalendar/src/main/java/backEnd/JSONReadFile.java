@@ -200,10 +200,6 @@ public class JSONReadFile {
 		System.out.println("Reading from JSON File - TimeSlots for April 7th:");
 		System.out.println(scheduler.displayScheduleOnDay(7));
 		
-		// TODO: 
-		// Implement a text box 
-		// Implement Edit/Remove options for the schedule
-		
 	}
 
 }
