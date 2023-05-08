@@ -69,23 +69,32 @@ public class AvailabilityWindow {
 		return sb.toString();
 	}
 
-	public boolean reserveSlot(LocalTime time) {
+	public boolean reserveSlot(LocalTime time, boolean logSwitch) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
 		LocalTime roundedTime = roundedTime(time);
+		String formattedTime = roundedTime.format(formatter);
+		
 		
 		// Time is outside the availability window
 		if (time.isBefore(startTime) || time.isAfter(endTime)) {
-			System.out.println("Your requested time is unavailable!");
+			if (logSwitch == true) {
+				System.out.println("Your requested time of " + formattedTime + " is unavailable!");
+			}
 			return false; 
 		} 
 		// Time is within the availability window
 		else {
 			// check if the time slot exists
-			if (this.timeWindow.get(roundedTime) == true) {
-				System.out.println("Your requested "+roundedTime+" appointment has been scheduled!");
+			if (this.timeWindow.containsKey(roundedTime) == true) {
+				if (logSwitch == true) {
+					System.out.println("Your requested " + formattedTime + " appointment has been scheduled!");
+				}
 				timeWindow.put(roundedTime, false);
 				return true;
 			} else {
-				System.out.println("Your requested time is unavailable!");
+				if (logSwitch == true) {
+					System.out.println("Your requested time of " + formattedTime + " is unavailable!");
+				}
 				return false;
 			}
 		} 
@@ -140,11 +149,11 @@ public class AvailabilityWindow {
 		 *  ================================================
 		 */
 		System.out.println("Reserving Time-Slots");
-		testAvailWindow.reserveSlot(LocalTime.of(9, 0));
-		testAvailWindow.reserveSlot(LocalTime.of(9, 30));
-		testAvailWindow.reserveSlot(LocalTime.of(13, 0));
-		testAvailWindow.reserveSlot(LocalTime.of(15, 30));
-		testAvailWindow.reserveSlot(LocalTime.of(16, 0));
+		testAvailWindow.reserveSlot(LocalTime.of(9, 0), true);
+		testAvailWindow.reserveSlot(LocalTime.of(9, 30), true);
+		testAvailWindow.reserveSlot(LocalTime.of(13, 0), true);
+		testAvailWindow.reserveSlot(LocalTime.of(15, 30), true);
+		testAvailWindow.reserveSlot(LocalTime.of(16, 0), true);
 		
 		/** ================================================
 		 * 	SAMPLE TEST 4
