@@ -1,4 +1,4 @@
-package frontEnd;
+package frontend;
 
 /*
 import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;

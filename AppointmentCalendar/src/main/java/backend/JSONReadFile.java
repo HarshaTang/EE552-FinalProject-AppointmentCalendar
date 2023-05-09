@@ -1,4 +1,4 @@
-package backEnd;
+package backend;
 
 import java.util.Map;
 
@@ -59,13 +59,17 @@ class JSONDayMap {
 
 public class JSONReadFile {
 	private Map<Long, List<JSONMonthMap>> yearlyData;
-	private String filePath = System.getProperty("user.dir");
+	private String JSONFilePath;
 	
 	private enum FileNames {
 		year, month, months, day, days, timeSlots;
 	}
 	
 	public JSONReadFile (String fileName) {
+		String filePath = System.getProperty("user.dir");
+		
+		this.JSONFilePath = filePath + File.separator + fileName;
+		
 		this.yearlyData = new HashMap<Long, List<JSONMonthMap>>();
 		readFile(fileName);
 	}
@@ -74,7 +78,7 @@ public class JSONReadFile {
 		JSONParser parser = new JSONParser();
 		
 		try {
-			Object o = parser.parse(new FileReader(filePath + File.separator + fileName));
+			Object o = parser.parse(new FileReader(this.JSONFilePath));
 			JSONObject jO = (JSONObject) o;
 			
 			long year = (long) jO.get(FileNames.year.name());

@@ -1,12 +1,7 @@
-package testcode;
+package interactive_console;
 
-/** 
- * This code serves as a testing ground for our project code.
- * Also allows us to save the current calendar status to a file repeatedly
- */
-
-import backEnd.AppointmentScheduler;
-import backEnd.JSONReadFile;
+import backend.AppointmentScheduler;
+import backend.JSONReadFile;
 
 public class AppointmentCalendarMain {
 

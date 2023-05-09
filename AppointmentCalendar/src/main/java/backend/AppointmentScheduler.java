@@ -1,7 +1,7 @@
 /**
  * 
  */
-package backEnd;
+package backend;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
