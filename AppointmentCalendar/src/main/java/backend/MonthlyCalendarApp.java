@@ -1,4 +1,4 @@
-package backEnd;
+package backend;
 
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
@@ -13,24 +13,9 @@ public class MonthlyCalendarApp {
 	
 	private int year;
 	private int month;
-	//private int day;
 	private Map<Integer, String> dayMonthMap;
 	private List<Map<String, Integer>> fullCalendarLayout;
-	
-	/*
-	public CalendarApp () {
-		// Using local Date to get the current year, month, and day values
-		LocalDate currentDate = LocalDate.now();
-		
-		this.year = currentDate.getYear();
-		this.month = currentDate.getMonthValue();
-		//this.day = currentDate.getDayOfMonth();
-		
-		this.dayMonthMap = generateDayMonthMap();				// Run First
-		this.fullCalendarLayout = generateFullCalendarLayout();	// Run Second
-	}
-	*/
-	
+
 	public MonthlyCalendarApp (int aYear, int aMonth) throws DateTimeException {
 		LocalDate inputDate = null;
 		try {

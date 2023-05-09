@@ -1,6 +1,5 @@
-package backEnd;
+package backend;
 
-import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,15 +10,21 @@ public class AvailabilityWindow {
 	private final LocalTime startTime;
 	private final LocalTime endTime;
 	private LinkedHashMap<LocalTime, Boolean> timeWindow;
+	private LinkedHashMap<LocalTime, String> timeWindowText;
+	
+	private static final String DEFAULT_TIME_SLOT_TEXT_AVAIL = "Free";
+	private static final String DEFAULT_TIME_SLOT_TEXT_UNAVAIL = "Unavailable";
 	
 	public AvailabilityWindow(LocalTime startTime, LocalTime endTime) {
 		// initialize variables
-		timeWindow = new LinkedHashMap<LocalTime, Boolean>();
+		this.timeWindow = new LinkedHashMap<LocalTime, Boolean>();
+		this.timeWindowText = new LinkedHashMap<LocalTime, String>();
 
 		this.startTime = roundedTime(startTime);
 		this.endTime = roundedTime(endTime);
 		
 		this.timeWindow = generateTimeWindows(this.startTime, this.endTime);
+		this.timeWindowText = generateTimeWindowsText();
 	}
 	
 	private LocalTime roundedTime (LocalTime tempTime) {
@@ -59,51 +64,117 @@ public class AvailabilityWindow {
 		return timeWindowSlots;
 	}
 	
+	private LinkedHashMap<LocalTime, String> generateTimeWindowsText() {
+		LinkedHashMap<LocalTime, String> timeWindowText = new LinkedHashMap<LocalTime, String>();
+		
+		for (LocalTime t: this.timeWindow.keySet()) {
+			timeWindowText.put(t, DEFAULT_TIME_SLOT_TEXT_AVAIL);
+		}
+		return timeWindowText;
+	}
+	
 	public String displayTimeWindows() {
 		StringBuilder sb = new StringBuilder();
 		
 		for (LocalTime b: this.timeWindow.keySet()) {
-			sb.append(formatTimeDisplay(b) + "\t"+this.timeWindow.get(b) + "\n");
+			sb.append(formatTimeDisplay(b) + "\t"+this.timeWindow.get(b) + "\t" + this.timeWindowText.get(b) + "\n");
 		}
 		
 		return sb.toString();
 	}
+	
+	public boolean reserveSlot(LocalTime time, String text, boolean logSwitch) {
+		boolean result = reserve(time, text, logSwitch);
+		return result;
+	}
+	
+	public boolean reserveSlot(LocalTime time, boolean logSwitch) {
+		boolean result = reserve(time, null, logSwitch);
+		return result;
+	}
 
-	public boolean reserveSlot(LocalTime time) {
+	private boolean reserve(LocalTime time,String text, boolean logSwitch) {
 		LocalTime roundedTime = roundedTime(time);
+		String formattedTime = formatTimeDisplay(roundedTime);
+		
+		String timeSlotText = "";
+		
 		
 		// Time is outside the availability window
 		if (time.isBefore(startTime) || time.isAfter(endTime)) {
-			System.out.println("Your requested time is unavailable!");
+			if (logSwitch == true) {
+				System.out.println("Your requested time of " + formattedTime + " is unavailable!");
+			}
 			return false; 
 		} 
 		// Time is within the availability window
 		else {
 			// check if the time slot exists
-			if (this.timeWindow.get(roundedTime) == true) {
-				System.out.println("Your requested "+roundedTime+" appointment has been scheduled!");
-				timeWindow.put(roundedTime, false);
+			if (this.timeWindow.containsKey(roundedTime) == true) {
+				if (logSwitch == true) {
+					System.out.println("Your requested " + formattedTime + " appointment has been scheduled!");
+				}
+				this.timeWindow.put(roundedTime, false);
+				
+				if (text != null) {
+					timeSlotText = text;
+				} else {
+					timeSlotText = DEFAULT_TIME_SLOT_TEXT_UNAVAIL;
+				}
+				
+				this.timeWindowText.put(roundedTime, timeSlotText);
 				return true;
 			} else {
-				System.out.println("Your requested time is unavailable!");
+				if (logSwitch == true) {
+					System.out.println("Your requested time of " + formattedTime + " is unavailable!");
+				}
 				return false;
 			}
 		} 
 	}
 	
-	public LocalTime getAvailableTimeSlots() {
-		return null;
-	}
-	
-	
-	// TODO delete later
-	public boolean requestOpenSlots() {
+	public boolean getTimeSlotStatus(LocalTime timeRequest) {
+		// check if the time is in the list
+		if (this.timeWindow.containsKey(timeRequest)) {
+			// if it exists, check the status
+			if (this.timeWindow.get(timeRequest) == true) {
+				return true;
+			} 
+		} 
+		
 		return false;
 	}
 	
-	// TODO delete later
-	public int getRemainingSlots() {		
-		return 0;
+	public String getTimeSlotText(LocalTime timeRequest) {
+		// check if the time is in the list
+		if (this.timeWindowText.containsKey(timeRequest)) {
+			// if it exists, check the status
+			return this.timeWindowText.get(timeRequest);
+		} 
+		
+		return null;
+	}
+	
+	public boolean cancel (LocalTime timeRequest) {
+		if (this.timeWindow.containsKey(timeRequest)) {
+			// if it exists, check the status
+			if (this.timeWindow.get(timeRequest) == false) {
+				this.timeWindow.put(timeRequest, true);
+				this.timeWindowText.put(timeRequest, DEFAULT_TIME_SLOT_TEXT_AVAIL);
+				return true;
+			} 
+		} 
+		return false;
+	}
+	
+	public int getNumberOfAvailableSlots() {
+		int count = 0;
+		for (LocalTime b: this.timeWindow.keySet()) {
+			if (this.timeWindow.get(b) == true) {
+				count++;
+			}
+		}
+		return count;
 	}
 	
 	private String formatTimeDisplay(LocalTime time) {
@@ -140,11 +211,11 @@ public class AvailabilityWindow {
 		 *  ================================================
 		 */
 		System.out.println("Reserving Time-Slots");
-		testAvailWindow.reserveSlot(LocalTime.of(9, 0));
-		testAvailWindow.reserveSlot(LocalTime.of(9, 30));
-		testAvailWindow.reserveSlot(LocalTime.of(13, 0));
-		testAvailWindow.reserveSlot(LocalTime.of(15, 30));
-		testAvailWindow.reserveSlot(LocalTime.of(16, 0));
+		testAvailWindow.reserveSlot(LocalTime.of(9, 0), true);
+		testAvailWindow.reserveSlot(LocalTime.of(9, 30), true);
+		testAvailWindow.reserveSlot(LocalTime.of(13, 0), true);
+		testAvailWindow.reserveSlot(LocalTime.of(15, 30), true);
+		testAvailWindow.reserveSlot(LocalTime.of(16, 0), true);
 		
 		/** ================================================
 		 * 	SAMPLE TEST 4
