@@ -80,6 +80,10 @@ public class AppointmentScheduler {
 		}
 	}
 	
+	public List<Map<String, Integer>> getCalendarLayoutMap() {
+		return this.monthlyCalendar.getFullCalendarLayout();
+	}
+	
 	public boolean getAvailabilityStatus (int day, String timeStr) {
 		if (this.monthlyCalendarTimeSlots.containsKey(day)) {
 			AvailabilityWindow timeWindow = this.monthlyCalendarTimeSlots.get(day);
