@@ -39,7 +39,7 @@ public class MonthlyCalendarApp {
 	 * 			PRIVATE AUTOMATED FUNCTIONS
 	 *  ================================================
 	 */
-	private String getDayOfWeek(int day) { 
+	public String getDayOfWeek(int day) { 
 		DayOfWeek dayOfWeek = null;
 		String numericalDayOfWeek = "INVALID";	// default is -1, meaning bad day input
 		
@@ -171,60 +171,6 @@ public class MonthlyCalendarApp {
 		}
 		
 		return sb.toString();
-	}
-
-	public static void main(String[] args) {
-		MonthlyCalendarApp sampleCalendar = new MonthlyCalendarApp(2023, 4);
-		
-		System.out.println("Today's Year/Month: "+sampleCalendar.getYearMonthDate()+"\n");
-		
-		/** ================================================
-		 * 	SAMPLE TEST 1
-		 *  Sample Day of Week Print Outs
-		 *  ================================================
-		 */
-		System.out.println("Sample Day of Week Print Outs:");
-		for (int i = 1; i <= 7; i++) {
-			System.out.println("\tDay "+i+" falls on a "+sampleCalendar.getDayOfWeek(i));
-		}
-		
-		/** ================================================
-		 * 	SAMPLE TEST 2
-		 *  Getting Month represented numerically as a map
-		 *  ================================================
-		 */
-		Map<Integer, String> dayMonthMap = sampleCalendar.getDayMonthMap();
-		int count = 0;
-		System.out.println("\nDisplaying months numerically as a map:");
-		for (Integer i: dayMonthMap.keySet()) {
-			if (count == 7) {
-				System.out.println();
-				count = 0;
-			}
-			System.out.print(i + "=" + dayMonthMap.get(i) + "\t");
-			count++;
-		}
-		System.out.println("\n");
-		
-		/** ================================================
-		 * 	SAMPLE TEST 3
-		 *  Get Full Calendar as ArrayMap
-		 *  ================================================
-		 */
-		System.out.println("Get Full Calendar as ArrayMap: ");
-		List<Map<String, Integer>> fullCalendar = sampleCalendar.getFullCalendarLayout();
-		for (Map<String, Integer> m: fullCalendar) {
-			System.out.println("\t" + m);
-		}
-		
-		/** ================================================
-		 * 	SAMPLE TEST 4
-		 *  Display Calendar Neatly
-		 *  ================================================
-		 */
-		System.out.println("\nDisplay Calendar Neatly:");
-		System.out.println(sampleCalendar.displayCalendarLayout());
-		
 	}
 
 }

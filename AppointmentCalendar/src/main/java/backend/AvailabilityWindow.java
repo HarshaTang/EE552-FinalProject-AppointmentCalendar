@@ -101,7 +101,7 @@ public class AvailabilityWindow {
 		
 		
 		// Time is outside the availability window
-		if (time.isBefore(startTime) || time.isAfter(endTime)) {
+		if (roundedTime.isBefore(startTime) || roundedTime.isAfter(endTime)) {
 			if (logSwitch == true) {
 				System.out.println("Your requested time of " + formattedTime + " is unavailable!");
 			}
@@ -111,19 +111,27 @@ public class AvailabilityWindow {
 		else {
 			// check if the time slot exists
 			if (this.timeWindow.containsKey(roundedTime) == true) {
-				if (logSwitch == true) {
-					System.out.println("Your requested " + formattedTime + " appointment has been scheduled!");
-				}
-				this.timeWindow.put(roundedTime, false);
-				
-				if (text != null) {
-					timeSlotText = text;
+				if (this.timeWindow.get(roundedTime) == true) {
+					if (logSwitch == true) {
+						System.out.println("Your requested " + formattedTime + " appointment has been scheduled!");
+					}
+					this.timeWindow.put(roundedTime, false);
+					
+					if (text != null) {
+						timeSlotText = text;
+					} else {
+						timeSlotText = DEFAULT_TIME_SLOT_TEXT_UNAVAIL;
+					}
+					
+					this.timeWindowText.put(roundedTime, timeSlotText);
+					return true;
 				} else {
-					timeSlotText = DEFAULT_TIME_SLOT_TEXT_UNAVAIL;
+					if (logSwitch == true) {
+						System.out.println("Your requested time of " + formattedTime + " is already taken!");
+					}
+					return false;
 				}
 				
-				this.timeWindowText.put(roundedTime, timeSlotText);
-				return true;
 			} else {
 				if (logSwitch == true) {
 					System.out.println("Your requested time of " + formattedTime + " is unavailable!");
@@ -186,45 +194,6 @@ public class AvailabilityWindow {
 	@Override
 	public String toString() {
 		return formatTimeDisplay(startTime) + " - " + formatTimeDisplay(endTime);
-	}
-	
-	public static void main(String[] args) {
-		AvailabilityWindow testAvailWindow = new AvailabilityWindow(LocalTime.of(9, 0), LocalTime.of(17, 30));
-		
-		/** ================================================
-		 * 	SAMPLE TEST 1
-		 *  Get Availability Windows Time Range
-		 *  ================================================
-		 */
-		System.out.println("Availability Windows Time Range:\t"+testAvailWindow.toString());
-
-		/** ================================================
-		 * 	SAMPLE TEST 2
-		 *  Display Availability Windows - Before Reserve
-		 *  ================================================
-		 */
-		System.out.println("\nDisplay Availability Windows:\n"+testAvailWindow.displayTimeWindows());
-		
-		/** ================================================
-		 * 	SAMPLE TEST 3
-		 *  Reserving Time-Slots
-		 *  ================================================
-		 */
-		System.out.println("Reserving Time-Slots");
-		testAvailWindow.reserveSlot(LocalTime.of(9, 0), true);
-		testAvailWindow.reserveSlot(LocalTime.of(9, 30), true);
-		testAvailWindow.reserveSlot(LocalTime.of(13, 0), true);
-		testAvailWindow.reserveSlot(LocalTime.of(15, 30), true);
-		testAvailWindow.reserveSlot(LocalTime.of(16, 0), true);
-		
-		/** ================================================
-		 * 	SAMPLE TEST 4
-		 *  Display Availability Windows - After Reserve
-		 *  ================================================
-		 */
-		System.out.println("\nDisplay Availability Windows:\n"+testAvailWindow.displayTimeWindows());
-		
-		
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class AppointmentScheduler {
 	private MonthlyCalendarApp monthlyCalendar;
 	private Map<Integer, AvailabilityWindow> monthlyCalendarTimeSlots;
@@ -40,6 +41,11 @@ public class AppointmentScheduler {
 		}
 	}
 	
+	/*  @Function: getNumDays
+	 *  @params
+	 *  @return
+	 * 
+	 */
 	public int getNumDays() {
 		return this.monthlyCalendarTimeSlots.keySet().size();
 	}
@@ -163,58 +169,4 @@ public class AppointmentScheduler {
 		return sb.toString();
 	}
 	*/
-	
-	public static void main(String[] args) {
-		// need to initialize with a year and month, and a start/end time
-		LocalTime startTime = LocalTime.of(9, 0);
-		LocalTime endTime   = LocalTime.of(17, 30);
-		AppointmentScheduler scheduler = new AppointmentScheduler(2023, 4, startTime, endTime);
-		
-		/** ================================================
-		 * 	SAMPLE TEST 1
-		 *  Reserve TimeSlots on April 1st, and Display Calendar
-		 *  ================================================
-		 */
-		System.out.println("Reserve TimeSlots on April 1st, and Display Calendar:");
-		scheduler.reserve(1, "9:45 AM", null, true);
-		scheduler.reserve(1, "1:11 PM", null, true);
-		scheduler.reserve(1, "12:33 PM", null, true);
-		scheduler.reserve(1, "4:30 PM", null, true);
-		scheduler.reserve(1, "2:30 PM", null, true);
-		scheduler.reserve(1, "5:30 PM", null, true);
-		System.out.println(scheduler.displayScheduleOnDay(1));
-		
-		/** ================================================
-		 * 	SAMPLE TEST 2
-		 *  Showcase TimeSlots on April 2nd
-		 *  ================================================
-		 */
-		System.out.println("Showcase TimeSlots on April 2nd (Should be Empty):");
-		System.out.println(scheduler.displayScheduleOnDay(2));
-		
-		/** ================================================
-		 * 	SAMPLE TEST 3
-		 *  Requesting Status of April 1st - 10AM
-		 *  ================================================
-		 */
-		System.out.println("Request Availability Status of April 1st - 10AM: " + scheduler.getAvailabilityStatus(1, "10:00 AM"));
-		
-		/** ================================================
-		 * 	SAMPLE TEST 4
-		 *  Requesting Text of April 1st - 10AM
-		 *  ================================================
-		 */
-		System.out.println("Requesting Text of April 1st - 10AM: " + scheduler.getAvailabilityText(1, "10:00 AM"));
-		
-		/** ================================================
-		 * 	SAMPLE TEST 5
-		 *  Cancel April 1st - 10AM Appointment
-		 *  ================================================
-		 */
-		System.out.println("\nCancel April 1st - 10AM Appointment: ");
-		System.out.println("Number of Available Slots on April 1st [BEFORE]: "+scheduler.getNumberOfAvailableSlots(1));
-		System.out.println("Removed Appointment: "+scheduler.removeAppointment(1, "10:00 AM"));
-		System.out.println("Number of Available Slots on April 1st [AFTER] : "+scheduler.getNumberOfAvailableSlots(1));
-
-	}
 }

@@ -1,18 +1,69 @@
 package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
+
+import backend.AvailabilityWindow;
+
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
+
+import java.time.LocalTime;
+
+import org.junit.jupiter.api.BeforeEach;
 
 public class AvailabilityWindowTest {
     // Write some tests here
 	
-	@Test
-	void canTest1() {
-		
+	private AvailabilityWindow testAvailWindow;
+	
+	@BeforeEach
+	public void beforeEachTestMethods() { 
+		testAvailWindow = new AvailabilityWindow(LocalTime.of(9, 0), LocalTime.of(17, 30));
 	}
 	
 	@Test
-	void canTest2() {
+	void canReserve() {
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(9, 0), false));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(9, 30), false));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(13, 0), false));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(15, 30), false));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(16, 0), false));
+	}
+	
+	@Test
+	void canTimeSlotStatus() {
+		// check status before reserve
+		assertEquals(true, testAvailWindow.getTimeSlotStatus(LocalTime.of(9, 0)));
 		
+		// reserve slot
+		testAvailWindow.reserveSlot(LocalTime.of(9, 0), false);
+		
+		// check status after reserve
+		assertEquals(false, testAvailWindow.getTimeSlotStatus(LocalTime.of(9, 0)));
+	}
+	
+	@Test
+	void canGetTimeSlotTextFree() {
+		// check text before reserve
+		assertEquals("Free", testAvailWindow.getTimeSlotText(LocalTime.of(9, 0)));
+	}
+	
+	@Test
+	void canGetTimeSlotTextUnavailable() {
+		// reserve slot
+		testAvailWindow.reserveSlot(LocalTime.of(9, 0), null, false);
+		
+		// check text after reserve
+		assertEquals("Unavailable", testAvailWindow.getTimeSlotText(LocalTime.of(9, 0)));
+	}
+	
+	@Test
+	void canGetTimeSlotTextWithInput() {
+		String text = "JUnitTest";
+		
+		// reserve slot with text
+		testAvailWindow.reserveSlot(LocalTime.of(10, 0), text, false);
+		
+		// check text after reserve with text
+		assertEquals(text, testAvailWindow.getTimeSlotText(LocalTime.of(10, 0)));
 	}
 	
 }
