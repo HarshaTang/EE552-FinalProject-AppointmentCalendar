@@ -57,7 +57,7 @@ public class AppointmentSchedulerTest {
 	@Test
 	public void canCancelAppointments() {
 		// reserve a slot
-		scheduler.reserve(1, "10:00 AM", null, true);
+		scheduler.reserve(1, "10:00 AM", null, false);
 		
 		// check available slots
 		assertEquals(16, scheduler.getNumberOfAvailableSlots(1));
