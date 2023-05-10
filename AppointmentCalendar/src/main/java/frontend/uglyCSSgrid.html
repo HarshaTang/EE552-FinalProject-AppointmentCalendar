@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ 
+.month-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  background-color: green;
+  padding: 10px;
+  align-content: space-evenly;
+}
+
+.grid-item {
+  background-color: pink;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.dayoftheweek {
+  background-color: orange;
+  font-size: 20px;
+}
+
+.empty {
+  background-color: yellow;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.clickable {
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.clickable:hover {
+	background-color: rgba(100, 100, 100, 0.8);
+}
+
+.grid-item-day {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  text-align: center;
+}
+
+</style>
+</head>
+
+
+
+
+
+<body>
+
+<h1>display: grid</h1>
+<p>Use display: grid; to make a block-level grid container:</p>
+
+<div id="grid1" class="month-container">
+    <div class="grid-item dayoftheweek">Sunday</div>
+    <div class="grid-item dayoftheweek">Monday</div>
+    <div class="grid-item dayoftheweek">Tuesday</div>
+    <div class="grid-item dayoftheweek">Wednesday</div>
+    <div class="grid-item dayoftheweek">Thursday</div>
+    <div class="grid-item dayoftheweek">Friday</div>
+    <div class="grid-item dayoftheweek">Saturday</div>
+</div>
+  
+<script>
+  // Get the current date
+  const today = new Date();
+
+  // Get the year and month of the current date
+  const year = today.getFullYear();
+  const month = today.getMonth();
+
+  // Get the number of days in the current month
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Get the name of the current month
+  const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(today);
+  
+  // Get the HTML element where the calendar rows will be generated
+  const gbody = document.querySelector('#grid1');
+
+  let date = 1;
+  for (let i = 0; i < 35; i++) {
+      const celll = document.createElement('div');
+      celll.classList.add('grid-item');
+
+      // Set the innerHTML of the cell to the date if it falls within the current month, or an empty string if it doesn't
+      if (i < new Date(year, month, 1).getDay()) {
+          celll.classList.add('empty');
+          celll.innerHTML = '';
+        } else if (date > daysInMonth) {
+          celll.classList.add('empty');
+          celll.innerHTML = '';
+        } else {
+          celll.classList.add('clickable');
+          celll.innerHTML = date;
+          date++;
+        }
+        // Add a class of "today" to the cell if it represents the current date
+        if (year === today.getFullYear() && month === today.getMonth() && date - 1 === today.getDate()) {
+          celll.classList.add('grid-item');
+        }
+        // Add the cell to the row
+        gbody.appendChild(celll);
+  };
+</script>
+
+<script>
+    /*
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(today);
+  */
+</script>  
+  
+<script>
+    /*
+  //From Reddit//
+  const frag = document.createDocumentFragment();
+
+  x.forEach(appendItemToFragment);
+
+  document.querySelector('#grid').appendChild(frag);
+  
+  function appendItemToFragment(element) {
+    frag.appendChild(createGridCell(element));
+  }
+
+  function createGridCell({ thumbnailUrl, id, title }) {
+    const gridCell = document.createElement('div');
+    gridCell.className = 'grid-item';
+    //price.textContent = x;
+    //const name = document.createElement('div');
+    name.textContent = title;
+    gridCell.appendChild(img);
+    gridCell.appendChild(price);
+    gridCell.appendChild(name);
+    return gridCell;
+  }
+  */
+  //            //
+</script>
+
+
+
+</body>
+</html>
+
+
