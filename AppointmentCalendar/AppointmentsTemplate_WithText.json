@@ -1,9 +1,9 @@
 {
-	"year": 2023,
-	"months": [
+	"YEAR": 2023,
+	"MONTHS_LIST": [
 		{
-			"month": 4,
-			"days": {
+			"MONTH_NUMBER": 4,
+			"DAYS_IN_MONTH_DICT": {
 				"1": {
 					"9:00 AM": "Meeting with Professor Marcus Aurelius",
 					"10:00 AM": "Petting Zoo ",

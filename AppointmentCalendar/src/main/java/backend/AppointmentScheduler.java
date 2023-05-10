@@ -1,6 +1,3 @@
-/**
- * 
- */
 package backend;
 
 import java.time.LocalTime;
@@ -9,14 +6,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/* class: Appointment Scheduler
+ * Description: The purpose of this class is to create schedules, reserve slots for multiple days within a specified month. 
+ * This class is the primary one that the front-end side will interface with. 
+ */
 public class AppointmentScheduler {
 	private MonthlyCalendarApp monthlyCalendar;
 	private Map<Integer, AvailabilityWindow> monthlyCalendarTimeSlots;
+	private int year;
+	private int month;
 	
+	/* class constructor: AppointmentScheduler
+	 * Description: Takes in a year and month to create an object
+	 * For now, we are limiting this class to a single month, rather than handling multiple months.
+	 * This constructor assumes that the daily schedule starts from 9am to 5:30pm
+	 */
 	public AppointmentScheduler(int aYear, int aMonth) {
 		LocalTime startTime = LocalTime.of(9, 0);
 		LocalTime endTime   = LocalTime.of(17, 30);
+		
+		this.year = aYear;
+		this.month = aMonth;
 		
 		this.monthlyCalendar = new MonthlyCalendarApp(aYear, aMonth);
 		
@@ -29,6 +39,12 @@ public class AppointmentScheduler {
 		}
 	}
 	
+	/* class constructor: AppointmentScheduler
+	 * Description: Takes in a year and month to create an object - along with a start time and end time for a single day
+	 * For now, we are limiting this class to a single month, rather than handling multiple months.
+	 * 
+	 * This constructor can allow you to specify daily schedules that are not part of the standard working day of 9am-5:30 pm
+	 */
 	public AppointmentScheduler(int aYear, int aMonth, LocalTime startTime, LocalTime endTime) {
 		this.monthlyCalendar = new MonthlyCalendarApp(aYear, aMonth);
 		
@@ -42,18 +58,28 @@ public class AppointmentScheduler {
 	}
 	
 	/*  @Function: getNumDays
-	 *  @params
-	 *  @return
-	 * 
+	 *  @param: none
+	 *  @return: int
+	 *  @description: returns the total number of days within the class constructor's specified month
 	 */
 	public int getNumDays() {
 		return this.monthlyCalendarTimeSlots.keySet().size();
 	}
 	
+	/*  @Function: reserve - overloaded function
+	 *  @param: int - day input, LocalTime - time requested, String, text input, boolean, logger on/off
+	 *  @return: boolean
+	 *  @description: returns a true or false if it is able to sucessfully reserve a slot that's requested
+	 */
 	public boolean reserve(int day, LocalTime timeRequest, String text, boolean logSwitch) {
 		return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
 	}
 	
+	/*  @Function: reserve - overloaded function
+	 *  @param: int - day input, String - time requested, String, text input, boolean, logger on/off
+	 *  @return: boolean
+	 *  @description: returns a true or false if it is able to sucessfully reserve a slot that's requested
+	 */
 	public boolean reserve(int day, String timeStr, String text, boolean logSwitch) {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
 		
@@ -68,11 +94,23 @@ public class AppointmentScheduler {
 		return false;
 	}
 	
+	/*  @Function: displayScheduleOnDay
+	 *  @param: int - day input
+	 *  @return: String
+	 *  @description: returns the full schedule for a given day as a string value
+	 */
 	public String displayScheduleOnDay(int day) {
 		return this.monthlyCalendarTimeSlots.get(day).displayTimeWindows();
 	}
 	
-	public void populateDataFromJSON(List<JSONDayMap> daysMap, boolean logSwitch) {
+	/*  @Function: populateDataFromJSON
+	 *  @param: JSONReadFile - contains a jsonFile object with file read in, each having a schedule populated, boolean - logger on/off
+	 *  @return: none
+	 *  @description: populates the current schedule with the JSON file's values that has been read in. 
+	 */
+	public void populateDataFromJSON(JSONReadFile jsonFile, boolean logSwitch) {
+		List<JSONDayMap> daysMap = jsonFile.getMonthData(this.year, this.month);
+		
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
 		
 		for (JSONDayMap day: daysMap) {
@@ -86,10 +124,24 @@ public class AppointmentScheduler {
 		}
 	}
 	
+	/*  @Function: getCalendarLayoutMap
+	 *  @param: none
+	 *  @return: List<Map<String, Integer>> - It is a weekly list, each list has a string = day of week (SATURDAY), mapped to integer representing the day of the month = 1
+	 *  @description: returns the full calendar layout as a list of maps. 
+	 */
 	public List<Map<String, Integer>> getCalendarLayoutMap() {
 		return this.monthlyCalendar.getFullCalendarLayout();
 	}
 	
+	public String displayCalendarLayout () {
+		return this.monthlyCalendar.displayCalendarLayout();
+	}
+	
+	/*  @Function: getAvailabilityStatus
+	 *  @param: int - day input, String - time requested
+	 *  @return: boolean
+	 *  @description: gets the availability status (available or not - true/false) of a given day and time slot 
+	 */
 	public boolean getAvailabilityStatus (int day, String timeStr) {
 		if (this.monthlyCalendarTimeSlots.containsKey(day)) {
 			AvailabilityWindow timeWindow = this.monthlyCalendarTimeSlots.get(day);
@@ -106,6 +158,12 @@ public class AppointmentScheduler {
 		return false;
 	}
 	
+	/*  @Function: getAvailabilityText
+	 *  @param: int - day input, String - time requested
+	 *  @return: String
+	 *  @description: gets the availability status' text of a given day and time slot 
+	 *  Usually if it is unavailable, there is often a unique text associated with it
+	 */
 	public String getAvailabilityText (int day, String timeStr) {
 		if (this.monthlyCalendarTimeSlots.containsKey(day)) {
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
@@ -122,6 +180,11 @@ public class AppointmentScheduler {
 		return null;
 	}
 	
+	/*  @Function: removeAppointment
+	 *  @param: int - day input, String - time requested
+	 *  @return: boolean
+	 *  @description: cancels the appointment and returns a boolean indicating if it was successful or not. true means success. false means it failed
+	 */
 	public boolean removeAppointment (int day, String timeStr) {
 		if (getAvailabilityStatus(day, timeStr) == false) {
 			AvailabilityWindow timeWindow = this.monthlyCalendarTimeSlots.get(day);
@@ -141,6 +204,11 @@ public class AppointmentScheduler {
 		return false;
 	}
 	
+	/*  @Function: getNumberOfAvailableSlots
+	 *  @param: int - day input
+	 *  @return: int
+	 *  @description: returns the number of available slots within a given day
+	 */
 	public int getNumberOfAvailableSlots (int day) {
 		try {
 			return this.monthlyCalendarTimeSlots.get(day).getNumberOfAvailableSlots();

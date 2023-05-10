@@ -1,5 +1,7 @@
 package interactive_console;
 
+import java.util.List;
+
 import backend.AppointmentScheduler;
 import backend.JSONReadFile;
 
@@ -20,7 +22,9 @@ public class AppointmentCalendarMain {
 		int year = 2023;
 		int month = 4;
 		AppointmentScheduler scheduler = new AppointmentScheduler(year, month);
-		scheduler.populateDataFromJSON(jsonData.getMonthData(year, month), false);	// True - Display Reservation Logs. False - Don't Display
+		scheduler.populateDataFromJSON(jsonData, false);	// True - Display Reservation Logs. False - Don't Display
+		
+		System.out.println(scheduler.displayCalendarLayout());
 		
 		/** ================================================
 		 * 	SAMPLE TEST 1

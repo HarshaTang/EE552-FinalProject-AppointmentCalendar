@@ -30,7 +30,7 @@ public class JSONReadFileTest {
 		int year = 2023;
 		int month = 4;
 		scheduler = new AppointmentScheduler(year, month);
-		scheduler.populateDataFromJSON(jsonData.getMonthData(year, month), false);	// True - Display Reservation Logs. False - Don't Display
+		scheduler.populateDataFromJSON(jsonData, false);	// True - Display Reservation Logs. False - Don't Display
 	}
 	
 	@Test
