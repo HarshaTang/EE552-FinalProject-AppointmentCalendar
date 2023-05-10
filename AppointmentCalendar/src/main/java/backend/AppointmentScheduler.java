@@ -66,26 +66,53 @@ public class AppointmentScheduler {
 		return this.monthlyCalendarTimeSlots.keySet().size();
 	}
 	
-	/*  @Function: reserve - overloaded function
-	 *  @param: int - day input, LocalTime - time requested, String, text input, boolean, logger on/off
-	 *  @return: boolean
-	 *  @description: returns a true or false if it is able to sucessfully reserve a slot that's requested
+	/*  @Function: getYear
+	 *  @param: none
+	 *  @return: int
+	 *  @description: returns the year value
 	 */
-	public boolean reserve(int day, LocalTime timeRequest, String text, boolean logSwitch) {
-		return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
+	public int getYear() {
+		return this.year;
+	}
+	
+	/*  @Function: getMonth
+	 *  @param: none
+	 *  @return: int
+	 *  @description: returns the month value
+	 */
+	public int getMonth() {
+		return this.month;
+	}
+	
+	/*  @Function: getTimeSlotsMap
+	 *  @param: none
+	 *  @return: Map<String, String>
+	 *  @description: returns the a map of the time slots as String local time and text
+	 */
+	public Map<String, String> getTimeSlotsMap(int day) {
+		return this.monthlyCalendarTimeSlots.get(day).getTimeSlotsMap();
 	}
 	
 	/*  @Function: reserve - overloaded function
-	 *  @param: int - day input, String - time requested, String, text input, boolean, logger on/off
+	 *  @param: int - day input, LocalTime - time requested, String, text input
 	 *  @return: boolean
 	 *  @description: returns a true or false if it is able to sucessfully reserve a slot that's requested
 	 */
-	public boolean reserve(int day, String timeStr, String text, boolean logSwitch) {
+	public boolean reserve(int day, LocalTime timeRequest, String text) {
+		return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text);
+	}
+	
+	/*  @Function: reserve - overloaded function
+	 *  @param: int - day input, String - time requested, String, text input
+	 *  @return: boolean
+	 *  @description: returns a true or false if it is able to sucessfully reserve a slot that's requested
+	 */
+	public boolean reserve(int day, String timeStr, String text) {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
 		
 		try {
 			LocalTime timeRequest = LocalTime.parse(timeStr, format);
-			return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text, logSwitch);
+			return this.monthlyCalendarTimeSlots.get(day).reserveSlot(timeRequest, text);
 		} catch (Exception e) {
 			System.out.println("ERROR! Wrong time format was entered!");
 			e.printStackTrace();
@@ -104,11 +131,11 @@ public class AppointmentScheduler {
 	}
 	
 	/*  @Function: populateDataFromJSON
-	 *  @param: JSONReadFile - contains a jsonFile object with file read in, each having a schedule populated, boolean - logger on/off
+	 *  @param: JSONReadFile - contains a jsonFile object with file read in, each having a schedule populated
 	 *  @return: none
 	 *  @description: populates the current schedule with the JSON file's values that has been read in. 
 	 */
-	public void populateDataFromJSON(JSONReadFile jsonFile, boolean logSwitch) {
+	public void populateDataFromJSON(JSONCalendar jsonFile) {
 		List<JSONDayMap> daysMap = jsonFile.getMonthData(this.year, this.month);
 		
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("h:mm a");
@@ -118,7 +145,7 @@ public class AppointmentScheduler {
 			for (String time: day.getTimeSlots().keySet()) {
 				String text = day.getTimeSlots().get(time);
 				LocalTime timeFormatted = LocalTime.parse(time, format);
-				reserve(dayNumber, timeFormatted, text, logSwitch);
+				reserve(dayNumber, timeFormatted, text);
 				
 			}
 		}
@@ -198,7 +225,8 @@ public class AppointmentScheduler {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("Appointment cannot be cancelled!");
+			//System.out.println("Appointment cannot be cancelled!");
+			return false;
 		}
 		
 		return false;

@@ -3,7 +3,9 @@ package backend;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /* class: Availability Window
  * Description: The purpose of this class is to create the availability windows (time slots) for a single day. 
@@ -118,21 +120,21 @@ public class AvailabilityWindow {
 	}
 	
 	/*  @Function: reserveSlot - overloaded function
-	 *  @param: LocalTime - time requested, String - text of appointment, boolean - logger on/off
+	 *  @param: LocalTime - time requested, String - text of appointment
 	 *  @return: boolean
 	 *  @description: calls the reserve function to attempt to reserve a slot
 	 */
-	public boolean reserveSlot(LocalTime time, String text, boolean logSwitch) {
-		return reserve(time, text, logSwitch);
+	public boolean reserveSlot(LocalTime time, String text) {
+		return reserve(time, text);
 	}
 	
 	/*  @Function: reserveSlot - overloaded function
-	 *  @param: LocalTime - time requested, boolean - logger on/off
+	 *  @param: LocalTime - time requested
 	 *  @return: boolean
 	 *  @description: calls the reserve function to attempt to reserve a slot
 	 */
-	public boolean reserveSlot(LocalTime time, boolean logSwitch) {
-		return reserve(time, null, logSwitch);
+	public boolean reserveSlot(LocalTime time) {
+		return reserve(time, null);
 	}
 	
 	/*  @Function: reserve
@@ -141,52 +143,46 @@ public class AvailabilityWindow {
 	 *  @description: attempts to reserve a slot based on the specified time and text conditions, and returns a true or false if it is successful.
 	 *  true is successful, and false is unsuccessful.
 	 */
-	private boolean reserve(LocalTime time,String text, boolean logSwitch) {
+	private boolean reserve(LocalTime time,String text) {
 		LocalTime roundedTime = roundedTime(time);
 		String formattedTime = formatTimeDisplay(roundedTime);
 		
 		String timeSlotText = "";
 		
-		
+		// return false if text is set as "Free"
+		if (DEFAULT_TIME_SLOT_TEXT_AVAIL.equals(text)) {
+			return false;
+		}
 		// Time is outside the availability window
-		if (roundedTime.isBefore(startTime) || roundedTime.isAfter(endTime)) {
-			if (logSwitch == true) {
-				System.out.println("Your requested time of " + formattedTime + " is unavailable!");
-			}
+		else if (roundedTime.isBefore(startTime) || roundedTime.isAfter(endTime)) {
+			//System.out.println("Your requested time of " + formattedTime + " is unavailable!");
 			return false; 
 		} 
 		// Time is within the availability window
-		else {
-			// check if the time slot exists
-			if (this.timeWindow.containsKey(roundedTime) == true) {
-				if (this.timeWindow.get(roundedTime) == true) {
-					if (logSwitch == true) {
-						System.out.println("Your requested " + formattedTime + " appointment has been scheduled!");
-					}
-					this.timeWindow.put(roundedTime, false);
-					
-					if (text != null) {
-						timeSlotText = text;
-					} else {
-						timeSlotText = DEFAULT_TIME_SLOT_TEXT_UNAVAIL;
-					}
-					
-					this.timeWindowText.put(roundedTime, timeSlotText);
-					return true;
+		else if (this.timeWindow.containsKey(roundedTime)) {
+			if (this.timeWindow.get(roundedTime) == true) {
+				//System.out.println("Your requested " + formattedTime + " appointment has been scheduled!");
+				
+				this.timeWindow.put(roundedTime, false);
+				
+				if (text != null) {
+					timeSlotText = text;
 				} else {
-					if (logSwitch == true) {
-						System.out.println("Your requested time of " + formattedTime + " is already taken!");
-					}
-					return false;
+					timeSlotText = DEFAULT_TIME_SLOT_TEXT_UNAVAIL;
 				}
 				
+				this.timeWindowText.put(roundedTime, timeSlotText);
+				return true;
 			} else {
-				if (logSwitch == true) {
-					System.out.println("Your requested time of " + formattedTime + " is unavailable!");
-				}
+				//System.out.println("Your requested time of " + formattedTime + " is already taken!");
 				return false;
 			}
-		} 
+			
+		} else {
+			//System.out.println("Your requested time of " + formattedTime + " is unavailable!");
+			return false;
+		}
+		
 	}
 	
 	/*  @Function: getTimeSlotStatus
@@ -222,6 +218,21 @@ public class AvailabilityWindow {
 		
 		return null;
 	}
+
+	/*  @Function: getTimeSlotsMap
+	 *  @param: none
+	 *  @return: Map<String, String>
+	 *  @description: returns the timeWindowText as a map <String, String>
+	 */
+	public Map<String, String> getTimeSlotsMap() {
+		Map<String, String> strStrMap = new HashMap<>();
+		for (LocalTime time: this.timeWindowText.keySet()) {
+			String formattedTime = formatTimeDisplay(time);
+			strStrMap.put(formattedTime, this.timeWindowText.get(time));
+		}
+		return strStrMap;
+	}
+	
 	
 	/*  @Function: cancel
 	 *  @param: LocalTime - time requested

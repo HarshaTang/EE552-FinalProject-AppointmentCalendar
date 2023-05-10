@@ -2,16 +2,16 @@ package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
 
 import backend.AppointmentScheduler;
-import backend.JSONReadFile;
+import backend.JSONCalendar;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class JSONReadFileTest {
+public class JSONCalendarTest {
     // Write some tests here
 	
-	private JSONReadFile jsonData;
+	private JSONCalendar jsonData;
 	private AppointmentScheduler scheduler;
 	
 	@BeforeEach
@@ -20,7 +20,8 @@ public class JSONReadFileTest {
 		 * 	Set-Up the JSON Reader
 		 *  ================================================
 		 */
-		jsonData = new JSONReadFile("AppointmentsTemplate_WithText.json");
+		jsonData = new JSONCalendar();
+		jsonData.read("AppointmentsTemplate_WithText.json");
 		//jsonData.printData();
 		
 		/** ================================================
@@ -30,7 +31,7 @@ public class JSONReadFileTest {
 		int year = 2023;
 		int month = 4;
 		scheduler = new AppointmentScheduler(year, month);
-		scheduler.populateDataFromJSON(jsonData, false);	// True - Display Reservation Logs. False - Don't Display
+		scheduler.populateDataFromJSON(jsonData);
 	}
 	
 	@Test

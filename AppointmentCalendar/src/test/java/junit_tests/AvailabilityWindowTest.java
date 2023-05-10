@@ -21,11 +21,11 @@ public class AvailabilityWindowTest {
 	
 	@Test
 	void canReserve() {
-		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(9, 0), false));
-		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(9, 30), false));
-		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(13, 0), false));
-		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(15, 30), false));
-		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(16, 0), false));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(9, 0)));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(9, 30)));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(13, 0)));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(15, 30)));
+		assertEquals(true, testAvailWindow.reserveSlot(LocalTime.of(16, 0)));
 	}
 	
 	@Test
@@ -34,7 +34,7 @@ public class AvailabilityWindowTest {
 		assertEquals(true, testAvailWindow.getTimeSlotStatus(LocalTime.of(9, 0)));
 		
 		// reserve slot
-		testAvailWindow.reserveSlot(LocalTime.of(9, 0), false);
+		testAvailWindow.reserveSlot(LocalTime.of(9, 0));
 		
 		// check status after reserve
 		assertEquals(false, testAvailWindow.getTimeSlotStatus(LocalTime.of(9, 0)));
@@ -49,7 +49,7 @@ public class AvailabilityWindowTest {
 	@Test
 	void canGetTimeSlotTextUnavailable() {
 		// reserve slot
-		testAvailWindow.reserveSlot(LocalTime.of(9, 0), null, false);
+		testAvailWindow.reserveSlot(LocalTime.of(9, 0), null);
 		
 		// check text after reserve
 		assertEquals("Unavailable", testAvailWindow.getTimeSlotText(LocalTime.of(9, 0)));
@@ -60,7 +60,7 @@ public class AvailabilityWindowTest {
 		String text = "JUnitTest";
 		
 		// reserve slot with text
-		testAvailWindow.reserveSlot(LocalTime.of(10, 0), text, false);
+		testAvailWindow.reserveSlot(LocalTime.of(10, 0), text);
 		
 		// check text after reserve with text
 		assertEquals(text, testAvailWindow.getTimeSlotText(LocalTime.of(10, 0)));

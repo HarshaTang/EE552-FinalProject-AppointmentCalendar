@@ -1,13 +1,18 @@
 package backend;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -108,9 +113,10 @@ class JSONDayMap {
 /* class: JSONReadFile
  * Description: The purpose of this class is to read the JSON File in a easy to call object
  */
-public class JSONReadFile {
+public class JSONCalendar {
 	private Map<Long, List<JSONMonthMap>> yearlyData;
-	private String JSONFilePath;
+	private String JSONInputFilePath;
+	private String JSONOutputFilePath;
 	
 	/* enums: JSONKeys
 	 * Description: creates the enums of keys that are in the JSON file
@@ -120,21 +126,78 @@ public class JSONReadFile {
 	}
 	
 	/* constructor class: JSONReadFile
-	 * @param: String - file name to be read in
 	 * Description: initializes the file path to read the file properly
 	 * Also, initializes the yearly data map and starts reading the file
 	 */
-	public JSONReadFile (String fileName) {
-		String filePath = System.getProperty("user.dir");
-		
-		this.JSONFilePath = filePath + File.separator + fileName;
-		
+	public JSONCalendar () {
 		this.yearlyData = new HashMap<Long, List<JSONMonthMap>>();
-		readFile(fileName);
+	}
+	
+	/* @Function: read
+	 * @param: String - file name to be read in
+	 * @return: none
+	 * Description: takes in the file name parameter and starts reading it
+	 */
+	public void read(String inputFileName) {
+		this.JSONInputFilePath = System.getProperty("user.dir") + File.separator + inputFileName;
+		readFile(inputFileName);
+	}
+	
+	/* @Function: write
+	 * @param: String - file name to be write out
+	 * @return: none
+	 * Description: takes in the file name parameter and starts writing to it
+	 */
+	public void write(AppointmentScheduler scheduler, String outputFileName) throws IOException {
+		this.JSONOutputFilePath = System.getProperty("user.dir") + File.separator + outputFileName;
+		writeFile(scheduler, outputFileName);
+	}
+	
+	/*  @Function: writeFile
+	 *  @param: String - fileName of the output json file
+	 *  @return: none
+	 *  @description: writes to the json file and populates all the values
+	 */
+	private void writeFile(AppointmentScheduler scheduler, String fileName) throws IOException {
+		File file = new File(fileName);
+		FileWriter writer = new FileWriter(file);
+		
+		// Store values to outputData map
+		Map<String, Object> outputData = new HashMap<>();
+		
+		// STEP 1: Storing the Year
+		outputData.put(JSONKeys.YEAR.name(), scheduler.getYear());
+		
+		// STEP 2: Storing the list of months
+        Map<String, Object> monthsListMap = new HashMap<>();
+        monthsListMap.put(JSONKeys.MONTH_NUMBER.name(), scheduler.getMonth());
+
+	    // STEP 3: Storing the days in a month dictionary
+	    Map<String, Object> daysInMonthDict = new HashMap<>();
+	    for (int days = 1; days <= scheduler.getNumDays(); days++) {
+	    	String dayNumber = String.valueOf(days);
+	    	daysInMonthDict.put(dayNumber, scheduler.getTimeSlotsMap(days));
+	    }
+	    
+	    // STEP 4: Storing days in month dict in the months list map
+	    monthsListMap.put(JSONKeys.DAYS_IN_MONTH_DICT.name(), daysInMonthDict);
+	    
+	    // STEP 4.5: Adding monthslistmap to an arraylist
+	    List<Map<String, Object>> tempList = new ArrayList<>();
+	    tempList.add(monthsListMap);
+	    
+	    // STEP 5: Storing dictionary in the output data final map
+	    outputData.put(JSONKeys.MONTHS_LIST.name(), tempList);
+	    
+	    // Writing to file using object mapper - and using writeValueAsString
+	    writer.write(new ObjectMapper().writeValueAsString(outputData));
+	    
+	    // Closing the writer
+	    writer.close();
 	}
 	
 	/*  @Function: readFile
-	 *  @param: String - fileName of the json file
+	 *  @param: String - fileName of the input json file
 	 *  @return: none
 	 *  @description: reads the json file and populates all the values
 	 *  Creates a Map<Long, List<JSONMonthMap>>. Long represents the year value, and each year is mapped to list of months (JSONMonthMap)
@@ -143,7 +206,7 @@ public class JSONReadFile {
 		JSONParser parser = new JSONParser();
 		
 		try {
-			Object o = parser.parse(new FileReader(this.JSONFilePath));
+			Object o = parser.parse(new FileReader(this.JSONInputFilePath));
 			JSONObject jO = (JSONObject) o;
 			
 			long year = (long) jO.get(JSONKeys.YEAR.name());
