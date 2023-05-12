@@ -7,7 +7,7 @@ import backend.JSONCalendar;
 public class AppointmentCalendarMain {
 
 	public static void main(String[] args) {
-		/** ================================================
+		/* ================================================
 		 * 	Set-Up the JSON Reader
 		 *  ================================================
 		 */
@@ -15,7 +15,7 @@ public class AppointmentCalendarMain {
 		jsonData.read("savedSession.json");
 		//jsonData.printData();
 		
-		/** ================================================
+		/* ================================================
 		 * 	Set-Up the Scheduler + Read from JSON File
 		 *  ================================================
 		 */
@@ -24,14 +24,14 @@ public class AppointmentCalendarMain {
 		AppointmentScheduler scheduler = new AppointmentScheduler(year, month);
 		scheduler.populateDataFromJSON(jsonData);
 		
-		/** ================================================
+		/* ================================================
 		 *  Displaying your current month
 		 *  ================================================
 		 */
 		System.out.println("Displaying Calendar Layout For:"+year+"/"+month);
 		System.out.println(scheduler.displayCalendarLayout());
 		
-		/** ================================================
+		/* ================================================
 		 *  Display Schedule Read from JSON File
 		 *  ================================================
 		 */
@@ -55,7 +55,7 @@ public class AppointmentCalendarMain {
 		System.out.println(scheduler.displayScheduleOnDay(30));
 		*/
 		
-		/** ================================================
+		/* ================================================
 		 *  Request More TimeSlots
 		 *  ================================================
 		 */
@@ -82,7 +82,7 @@ public class AppointmentCalendarMain {
 		scheduler.reserve(10, "11:30 AM", "Freshman Welcome Meet");
 		*/
 		
-		/** ================================================
+		/* ================================================
 		 *  Cancel Appointments
 		 *  ================================================
 		 */
@@ -94,7 +94,7 @@ public class AppointmentCalendarMain {
 		System.out.println("Cancel 11th-3:30PM: "+scheduler.removeAppointment(11, "3:30 PM"));
 		*/
 		
-		/** ================================================
+		/* ================================================
 		 *  Get Available Slots in Each Day of Month
 		 *  ================================================
 		 */
@@ -105,14 +105,14 @@ public class AppointmentCalendarMain {
 		}
 		System.out.println();
 		*/
-		/** ================================================
+		/* ================================================
 		 *  Display 7 Day View
 		 *  ================================================
 		 */
 		ConsoleDisplayCalendarView viewer = new ConsoleDisplayCalendarView(scheduler);
 		viewer.generateWeeklyView(1);
 		
-		/** ================================================
+		/* ================================================
 		 *  Store current scheduler object in a JSON file
 		 *  ================================================
 		 */
