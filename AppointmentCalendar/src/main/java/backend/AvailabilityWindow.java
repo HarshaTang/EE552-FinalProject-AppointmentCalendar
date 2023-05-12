@@ -224,8 +224,8 @@ public class AvailabilityWindow {
 	 *  @return: Map<String, String>
 	 *  @description: returns the timeWindowText as a map <String, String>
 	 */
-	public Map<String, String> getTimeSlotsMap() {
-		Map<String, String> strStrMap = new HashMap<>();
+	public LinkedHashMap<String, String> getTimeSlotsMap() {
+		LinkedHashMap<String, String> strStrMap = new LinkedHashMap<>();
 		for (LocalTime time: this.timeWindowText.keySet()) {
 			String formattedTime = formatTimeDisplay(time);
 			strStrMap.put(formattedTime, this.timeWindowText.get(time));

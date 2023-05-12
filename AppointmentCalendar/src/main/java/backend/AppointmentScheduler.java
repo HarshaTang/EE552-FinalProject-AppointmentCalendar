@@ -3,6 +3,7 @@ package backend;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +58,15 @@ public class AppointmentScheduler {
 		}
 	}
 	
+	/*  @Function: getDayOfWeek
+	 *  @param: int - day
+	 *  @return: String - day of week
+	 *  @description: returns a string value of day of week of a particular day. For ex: 1 = SATURDAY
+	 */
+	public String getDayOfWeek(int day) {
+		return this.monthlyCalendar.getDayOfWeek(day);
+	}
+	
 	/*  @Function: getNumDays
 	 *  @param: none
 	 *  @return: int
@@ -89,7 +99,7 @@ public class AppointmentScheduler {
 	 *  @return: Map<String, String>
 	 *  @description: returns the a map of the time slots as String local time and text
 	 */
-	public Map<String, String> getTimeSlotsMap(int day) {
+	public LinkedHashMap<String, String> getTimeSlotsMap(int day) {
 		return this.monthlyCalendarTimeSlots.get(day).getTimeSlotsMap();
 	}
 	
