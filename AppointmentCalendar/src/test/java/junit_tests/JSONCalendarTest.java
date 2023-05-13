@@ -1,8 +1,8 @@
 package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import com.example.backend.AppointmentScheduler;
-import com.example.backend.JSONCalendar;
+import ee552.finalproject.backend.AppointmentScheduler;
+import ee552.finalproject.backend.JSONCalendar;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 

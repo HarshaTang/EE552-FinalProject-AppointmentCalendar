@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="98b4593e-b4be-49ef-be90-fb3efceab9f5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/alexnewdemo/AppointmentCalendarMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/AppointmentCalendarMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/alexnewdemo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/alexnewdemo/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/AppointmentScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/AppointmentScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/AvailabilityWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/AvailabilityWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/ConsoleDisplayCalendarView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/ConsoleDisplayCalendarView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/JSONCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/JSONCalendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/MonthlyCalendarApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/MonthlyCalendarApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/frontend/calenderview.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/frontend/calenderview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/frontend/uglyCSSgrid.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/frontend/uglyCSSgrid.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/alexnewdemo/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/AppointmentSchedulerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/AppointmentSchedulerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/AvailabilityWindowTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/AvailabilityWindowTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/JSONCalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/JSONCalendarTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/MonthlyCalendarAppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/MonthlyCalendarAppTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2PknqeClrJQiidR930rFkPxOXgy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.CalendarBrowserApplication">
+    <configuration name="AppointmentCalendarConsoleMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ee552.finalproject.mainapp.AppointmentCalendarConsoleMain" />
+      <module name="AppointmentCalendar" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ee552.finalproject.mainapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarBrowserApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ee552.finalproject.mainapp.CalendarBrowserApplication" />
+      <module name="AppointmentCalendar" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ee552.finalproject.mainapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CalendarBrowserApplication" />
+        <item itemvalue="Application.AppointmentCalendarConsoleMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="98b4593e-b4be-49ef-be90-fb3efceab9f5" name="Changes" comment="" />
+      <created>1684010139545</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684010139545</updated>
+    </task>
+    <servers />
+  </component>
+</project>

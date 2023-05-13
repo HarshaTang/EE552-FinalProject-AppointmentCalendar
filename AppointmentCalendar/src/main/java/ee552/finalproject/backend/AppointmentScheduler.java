@@ -1,4 +1,4 @@
-package com.example.backend;
+package ee552.finalproject.backend;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

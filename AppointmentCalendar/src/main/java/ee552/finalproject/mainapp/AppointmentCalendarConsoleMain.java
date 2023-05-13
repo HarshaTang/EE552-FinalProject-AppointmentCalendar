@@ -1,10 +1,10 @@
-package com.example.alexnewdemo;
+package ee552.finalproject.mainapp;
 
-import com.example.backend.AppointmentScheduler;
-import com.example.backend.ConsoleDisplayCalendarView;
-import com.example.backend.JSONCalendar;
+import ee552.finalproject.backend.AppointmentScheduler;
+import ee552.finalproject.backend.ConsoleDisplayCalendarView;
+import ee552.finalproject.backend.JSONCalendar;
 
-public class AppointmentCalendarMain {
+public class AppointmentCalendarConsoleMain {
 
 	public static void main(String[] args) {
 		/* ================================================

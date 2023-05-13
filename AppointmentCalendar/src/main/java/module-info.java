@@ -1,4 +1,4 @@
-module com.example.alexnewdemo {
+module ee552.finalproject.mainapp {
     requires javafx.controls;
     //requires javafx.fxml;
     requires jxbrowser;
@@ -8,6 +8,6 @@ module com.example.alexnewdemo {
     requires org.apache.commons.lang3;
     requires json.simple;
 
-    opens com.example.alexnewdemo to javafx.fxml;
-    exports com.example.alexnewdemo;
+    //opens ee552.finalproject.mainapp to javafx.fxml;
+    exports ee552.finalproject.mainapp;
 }

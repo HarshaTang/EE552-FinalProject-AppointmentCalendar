@@ -1,4 +1,4 @@
-package com.example.backend;
+package ee552.finalproject.backend;
 
 import java.time.Duration;
 import java.time.LocalTime;

@@ -1,7 +1,6 @@
-package com.example.backend;
+package ee552.finalproject.backend;
 
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

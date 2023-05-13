@@ -1,4 +1,4 @@
-package com.example.alexnewdemo;
+package ee552.finalproject.mainapp;
 
 import com.teamdev.jxbrowser.browser.Browser;
 import com.teamdev.jxbrowser.engine.Engine;
@@ -18,7 +18,7 @@ import java.time.Instant;
 
 import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 
-public class HelloApplication extends Application
+public class CalendarBrowserApplication extends Application
 {
     @Override
     public void start ( Stage stage ) throws IOException

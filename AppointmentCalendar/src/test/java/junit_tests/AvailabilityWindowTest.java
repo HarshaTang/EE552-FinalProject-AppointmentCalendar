@@ -1,7 +1,7 @@
 package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import com.example.backend.AvailabilityWindow;
+import ee552.finalproject.backend.AvailabilityWindow;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 
