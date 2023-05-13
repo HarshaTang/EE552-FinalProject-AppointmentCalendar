@@ -5,27 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98b4593e-b4be-49ef-be90-fb3efceab9f5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/alexnewdemo/AppointmentCalendarMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/AppointmentCalendarMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/alexnewdemo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/alexnewdemo/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/AppointmentScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/AppointmentScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/AvailabilityWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/AvailabilityWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/ConsoleDisplayCalendarView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/ConsoleDisplayCalendarView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/JSONCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/JSONCalendar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/MonthlyCalendarApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/MonthlyCalendarApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/frontend/calenderview.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/frontend/calenderview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/frontend/uglyCSSgrid.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/frontend/uglyCSSgrid.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/alexnewdemo/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/AppointmentSchedulerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/AppointmentSchedulerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/AvailabilityWindowTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/AvailabilityWindowTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/JSONCalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/JSONCalendarTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/junit_tests/MonthlyCalendarAppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/junit_tests/MonthlyCalendarAppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,11 +33,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.CalendarBrowserApplication">
     <configuration name="AppointmentCalendarConsoleMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ee552.finalproject.mainapp.AppointmentCalendarConsoleMain" />
