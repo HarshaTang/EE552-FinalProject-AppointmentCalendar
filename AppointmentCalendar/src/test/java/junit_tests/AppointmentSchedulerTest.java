@@ -2,7 +2,7 @@ package junit_tests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import backend.AppointmentScheduler;
+import com.example.backend.AppointmentScheduler;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 

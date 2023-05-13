@@ -1,8 +1,8 @@
-package main;
+package com.example.alexnewdemo;
 
-import backend.AppointmentScheduler;
-import backend.ConsoleDisplayCalendarView;
-import backend.JSONCalendar;
+import com.example.backend.AppointmentScheduler;
+import com.example.backend.ConsoleDisplayCalendarView;
+import com.example.backend.JSONCalendar;
 
 public class AppointmentCalendarMain {
 

@@ -1,4 +1,4 @@
-package backend;
+package com.example.backend;
 
 import java.time.Duration;
 import java.time.LocalTime;

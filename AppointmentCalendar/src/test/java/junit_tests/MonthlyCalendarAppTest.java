@@ -1,7 +1,7 @@
 package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import backend.MonthlyCalendarApp;
+import com.example.backend.MonthlyCalendarApp;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 

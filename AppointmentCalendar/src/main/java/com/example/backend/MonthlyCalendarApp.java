@@ -1,4 +1,4 @@
-package backend;
+package com.example.backend;
 
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
