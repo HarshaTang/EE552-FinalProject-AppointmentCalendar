@@ -4,16 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>AppointmentCalendar</groupId>
-    <artifactId>AppointmentCalendar</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>Appointment-Calendar</name>
-    <url>https://github.com/HarshaTang/EE552-FinalProject-AppointmentCalendar</url>
+    <groupId>com.example</groupId>
+    <artifactId>alexnewdemo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>alexnewdemo</name>
 
     <properties>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.2</junit.version>
     </properties>
 
@@ -63,40 +60,32 @@
             <artifactId>jxbrowser-javafx</artifactId>
             <version>7.32</version>
         </dependency>
-		
-		<!-- For Reading JSON Files -->
-		<dependency>
+
+        <!-- For Reading JSON Files -->
+        <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
-		
-		<!-- For Writing to JSON File: ObjectMapper -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.14.2</version>
-		</dependency>
-		
-		<!-- String Manipulations/ Apache Commons Lang -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
-		</dependency>
-		
+
+        <!-- For Writing to JSON File: ObjectMapper -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.2</version>
+        </dependency>
+
+        <!-- String Manipulations/ Apache Commons Lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
-			<plugin>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>3.0.0</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.22.2</version>
-			</plugin>
             <!-- Maven Compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
