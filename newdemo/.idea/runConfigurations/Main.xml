@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Main" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.example.alexnewdemo.HelloApplication" />
+    <module name="alexnewdemo" />
+    <option name="VM_PARAMETERS" value="--add-opens javafx.swing/javafx.embed.swing=jxbrowser --add-opens javafx.graphics/com.sun.javafx.stage=jxbrowser --add-exports javafx.graphics/com.sun.javafx.stage=jxbrowser --add-exports javafx.controls/com.sun.javafx.scene.control=jxbrowser" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

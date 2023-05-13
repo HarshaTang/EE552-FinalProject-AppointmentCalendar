@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Appointment Calendar</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        text-align: center;
+        padding: 8px;
+        border: 1px solid black;
+      }
+
+      th {
+        background-color: #333;
+        color: white;
+      }
+
+      .today {
+        background-color: #ccc;
+      }
+
+      .month {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+
+      /* Add styles for the time slot table */
+      .time-slots {
+        margin-top: 16px;
+      }
+
+      .time-slots th {
+        background-color: #ddd;
+        color: #333;
+      }
+
+      .time-slots td {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calendar">
+      <div class="month"></div>
+      <table>
+        <thead>
+          <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- Add a new table for the time slots -->
+      <table class="time-slots">
+        <thead>
+          <tr>
+            <th>Time Slots</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      // Get the current date
+      const today = new Date();
+
+      // Get the year and month of the current date
+      const year = today.getFullYear();
+      const month = today.getMonth();
+
+      // Get the number of days in the current month
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Get the name of the current month
+      const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(today);
+
+      // Get the HTML tbody element where the calendar rows will be generated
+      const tbody = document.querySelector('.calendar tbody');
+
+      // Get the HTML element where the month will be displayed
+      const monthDisplay = document.querySelector('.calendar .month');
+
+      // Set the text content of the month display element to the current month and year
+      monthDisplay.textContent = `${monthName} ${year}`;
+
+      // Generate the calendar rows
+      let date = 1;
+      for (let i = 0; i < 6; i++) {
+        // Create a new table row element
+        const row = document.createElement('tr');
+
+        // Generate the cells for this row
+        for (let j = 0; j < 7; j++) {
+          // Create a new table cell element
+          const cell = document.createElement('td');
+
+          // Set the innerHTML of the cell to the date if it falls within the current month, or an empty string if it doesn't
+          if (i === 0 && j < new Date(year, month, 1).getDay()) {
+            cell.innerHTML = '';
+          } else if (date > daysInMonth) {
+            cell.innerHTML = '';
+          } else {
+            cell.innerHTML = date;
+            date++;
+          }
+
+          // Add a class of "today" to the cell if it represents the current date
+          if (year === today.getFullYear() && month === today.getMonth() && date - 1 === today.getDate()) {
+            cell.classList.add('today');
+          }
+
+          // Add the cell to the row
+          row.appendChild(cell);
+        }
+
+        // Add the row to the tbody
+        tbody.appendChild(row);
+      }
+</script>
+
+<script>
+  // Define the available time slots
+  const timeSlots = [
+    '9:00 AM',
+    '9:30 AM',
+    '10:00 AM',
+    '10:30 AM',
+    '11:00 AM',
+    '11:30 AM',
+    '12:00 PM',
+    '12:30 PM',
+    '1:00 PM',
+    '1:30 PM',
+    '2:00 PM',
+    '2:30 PM',
+    '3:00 PM',
+    '3:30 PM',
+    '4:00 PM',
+    '4:30 PM',
+    '5:00 PM',
+
+  ];
+
+  // Get the HTML element where the time slots will be displayed
+  const timeSlotDisplay = document.querySelector('.calendar .time-slots');
+
+  // Generate the time slot rows
+  for (let i = 0; i < timeSlots.length; i++) {
+    // Create a new table row element
+    const row = document.createElement('tr');
+
+    // Create a new table cell element for the time slot
+    const timeSlotCell = document.createElement('td');
+    timeSlotCell.innerHTML = timeSlots[i];
+
+    // Add the time slot cell to the row
+    row.appendChild(timeSlotCell);
+
+    // Generate the cells for this row, one for each day of the calendar
+    for (let j = 0; j < 7; j++) {
+      // Create a new table cell element
+      const cell = document.createElement('td');
+
+      // Set the data-date attribute of the cell to the date it represents, in ISO format
+      if (date > daysInMonth) {
+        cell.setAttribute('data-date', '');
+      } else {
+        const isoDate = new Date(year, month, date).toISOString().split('T')[0];
+        cell.setAttribute('data-date', isoDate);
+        date++;
+      }
+
+      // Add the cell to the row
+      row.appendChild(cell);
+    }
+
+    // Add the row to the time slot display element
+    timeSlotDisplay.appendChild(row);
+  }
+</script>
+</body>
+</html>
