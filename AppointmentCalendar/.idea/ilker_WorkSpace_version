@@ -1,0 +1,61 @@
+<project version="4">
+  <component name="AutoImportSettings" autoReloadType="SELECTIVE" />
+  
+  <component name="ChangeListManager">
+    <list default="true" id="98b4593e-b4be-49ef-be90-fb3efceab9f5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  
+  <component name="Git.Settings" RECENT_GIT_ROOT_PATH="$PROJECT_DIR$/.." />
+  
+  <component name="MarkdownSettingsMigration" stateVersion="1" />
+  
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings mavenHome="Use Maven wrapper" useMavenConfig="true" />
+    </option>
+  </component>
+  
+  <component name="ProjectId" id="2PknqeClrJQiidR930rFkPxOXgy" />
+  
+  <component name="ProjectViewState" hideEmptyMiddlePackages="true" showLibraryContents="true" />
+  
+  <component name="PropertiesComponent">
+    <property key="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  
+  <component name="RunManager" selected="Application.CalendarBrowserApplication">
+    <configuration name="AppointmentCalendarConsoleMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ee552.finalproject.mainapp.AppointmentCalendarConsoleMain" />
+      <module name="AppointmentCalendar" />
+      <extension name="coverage">
+        <pattern pattern="ee552.finalproject.mainapp.*" enabled="true" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarBrowserApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ee552.finalproject.mainapp.CalendarBrowserApplication" />
+      <module name="AppointmentCalendar" />
+      <extension name="coverage">
+        <pattern pattern="ee552.finalproject.mainapp.*" enabled="true" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <item itemvalue="Application.CalendarBrowserApplication" />
+      <item itemvalue="Application.AppointmentCalendarConsoleMain" />
+    </recent_temporary>
+  </component>
+  
+  <component name="SpellCheckerSettings" RuntimeDictionaries="
