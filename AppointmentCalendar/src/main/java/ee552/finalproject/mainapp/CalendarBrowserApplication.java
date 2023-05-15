@@ -37,8 +37,18 @@ public class CalendarBrowserApplication extends Application
         Browser browser = engine.newBrowser();
 
         // Load the required web page.
-        String filePathHTML = System.getProperty("user.dir") + "/src/main/java/ee552/finalproject/frontend/WeekGrid.html";
-        browser.navigation().loadUrl("file://" + filePathHTML);
+        StringBuilder filePathHTML = new StringBuilder();
+        filePathHTML.append("file:").append(File.separator).append(File.separator)
+                .append(System.getProperty("user.dir")).append(File.separator)
+                .append("src").append(File.separator)
+                .append("main").append(File.separator)
+                .append("java").append(File.separator)
+                .append("ee552").append(File.separator)
+                .append("finalproject").append(File.separator)
+                .append("frontend").append(File.separator);
+        String fileName = "WeekGrid.html";
+        //String filePathHTML = System.getProperty("user.dir") + "src" + File.separator + "main" "/src/main/java/ee552/finalproject/frontend/WeekGrid.html";
+        browser.navigation().loadUrl(filePathHTML.toString() + fileName);
 
         // Create and embed JavaFX BrowserView component to display web content.
         BrowserView view = BrowserView.newInstance( browser );

@@ -116,14 +116,9 @@ public class AppointmentCalendarConsoleMain {
 		 *  Store current scheduler object in a JSON file
 		 *  ================================================
 		 */
-		try {
-			jsonData.write(scheduler, "savedSession.json");
-			System.out.println("\nSuccess! Finished writing current session to JSON File!");
-			
-		} catch (Exception e) {
-			System.out.println("ERROR! Failed to write saved session to file!");
-			e.printStackTrace();
-		}
+		jsonData.write(scheduler, "savedSession.json");
+		System.out.println("\nSuccess! Finished writing current session to JSON File!");
+
 	}
 
 }

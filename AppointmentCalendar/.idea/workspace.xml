@@ -7,6 +7,8 @@
     <list default="true" id="98b4593e-b4be-49ef-be90-fb3efceab9f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/savedSession.json" beforeDir="false" afterPath="$PROJECT_DIR$/savedSession.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/JSONCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/JSONCalendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/AppointmentCalendarConsoleMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/AppointmentCalendarConsoleMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/CalendarBrowserApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/CalendarBrowserApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,8 +93,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.CalendarBrowserApplication" />
-        <item itemvalue="JUnit.AppointmentSchedulerTest" />
         <item itemvalue="Application.AppointmentCalendarConsoleMain" />
+        <item itemvalue="JUnit.AppointmentSchedulerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -106,5 +108,16 @@
       <updated>1684010139545</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ee552/finalproject/backend/JSONCalendar.java</url>
+          <line>131</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

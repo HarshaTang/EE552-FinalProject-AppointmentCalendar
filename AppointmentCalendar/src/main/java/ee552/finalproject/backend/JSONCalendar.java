@@ -147,7 +147,7 @@ public class JSONCalendar {
 	 * @return: none
 	 * Description: takes in the file name parameter and starts writing to it
 	 */
-	public void write(AppointmentScheduler scheduler, String outputFileName) throws IOException {
+	public void write(AppointmentScheduler scheduler, String outputFileName) {
 		this.JSONOutputFilePath = System.getProperty("user.dir") + File.separator + outputFileName;
 		writeFile(scheduler, outputFileName);
 	}
@@ -157,9 +157,8 @@ public class JSONCalendar {
 	 *  @return: none
 	 *  @description: writes to the json file and populates all the values
 	 */
-	private void writeFile(AppointmentScheduler scheduler, String fileName) throws IOException {
+	private void writeFile(AppointmentScheduler scheduler, String fileName) {
 		File file = new File(fileName);
-		FileWriter writer = new FileWriter(file);
 		
 		// Store values to outputData map
 		Map<String, Object> outputData = new HashMap<>();
@@ -187,12 +186,13 @@ public class JSONCalendar {
 	    
 	    // STEP 5: Storing dictionary in the output data final map
 	    outputData.put(JSONKeys.MONTHS_LIST.name(), tempList);
-	    
-	    // Writing to file using object mapper - and using writeValueAsString
-	    writer.write(new ObjectMapper().writeValueAsString(outputData));
-	    
-	    // Closing the writer
-	    writer.close();
+		try (FileWriter writer = new FileWriter(file)) {
+			// Writing to file using object mapper - and using writeValueAsString
+			writer.write(new ObjectMapper().writeValueAsString(outputData));
+		} catch (Exception e) {
+			System.out.println("ERROR! Failed to write saved session to file!"+e);
+			e.printStackTrace();
+		}
 	}
 	
 	/*  @Function: readFile
