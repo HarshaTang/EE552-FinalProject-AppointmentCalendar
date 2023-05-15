@@ -66,6 +66,14 @@ input,
     background-color: rgba(145, 255, 255, 0.8);
 }
 
+.aptAvailable {
+    background-color: rgba(161, 255, 165, 0.8);
+}
+
+.aptFull {
+    background-color: rgba(255, 161, 161, 0.8);
+}
+
 #wrapper{
   margin:0 auto;
 }
@@ -87,6 +95,59 @@ input,
 <script>
 
 /* ESSENTIAL SCRIPTS */
+
+// for (let k = 0; k < 7; k++) {
+//     const dateHeaderID = "day" + (k+1);
+//     document.getElementById(dateHeaderID).innerHTML = today;
+// }
+
+function pageSetup() {
+    // Get full details of today's date
+    const today = new Date();
+
+    // Creates variables for specific parts of the day
+    const currentDay = today.getDate();
+    const currentYear = today.getFullYear();
+    const month = today.getMonth() // Grabs today's date
+
+    // Sets text for columns based on dates
+    for (let i = 0; i < 7; i++) {
+        const dateHeaderID = "day" + String(i+1);
+        document.getElementById(dateHeaderID).innerHTML = currentDay + i;
+    }
+    
+    // Sets default text for buttons
+    for (let i = 0; i < 17; i++) {
+        for (let j = 0; j < 7; j++) {
+            document.getElementById(i + " " + j).innerHTML = "-----";
+            document.getElementById(i + " " + j).classList.add("aptAvailable");
+            
+        }
+    }
+
+    // Sets default content of text box to empty
+    document.getElementById("fullname").value = "";
+
+    document.getElementById("mutabletext").innerHTML = "No Appointment Selected";
+    // Set up text for buttons
+
+    //  const buttonID;
+    //  const timeValueText;
+    //  const aptDescription;
+    // fetch('savedSession.json');
+    //  for (let i = 1, i <= 7, i++) {
+    //      for (let j = 0, j <= 16, j++) {
+	// 		 timeValueText = timeKeeper(j);
+	// 		 aptDescription = scheduler.getAvailabilityText(j, timeValueText);
+    //          buttonID = i + " " + j;
+    //          document.getElementById(buttonID).innerHTML = aptDescription;
+    //          //set innerhtml of button
+    //      }
+    //  }
+
+}
+
+
 function timeKeeper(input) {
     const timeValues = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", 
     "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", ]
@@ -94,34 +155,87 @@ function timeKeeper(input) {
 }
 
 function tempClick(item) {
-    // const buttonName = item;
+    // Time Slot + Date#
     const timeandday = item.split(" ");
-    const newName = timeandday[0];
-    const aptname = timeKeeper(newName);
-    document.getElementById("mutabletext").innerHTML = aptname;
+    const newTime = timeandday[0];
+    const aptTime = timeKeeper(newTime);
+
+    const month = new Date().getMonth();
+    const datePlus = Number(timeandday[1]) + 1;
+    const aptDate = document.getElementById("day" + datePlus).innerHTML;
+    const text = document.getElementById(item).innerHTML;
+    if (text.includes("-")) {
+        document.getElementById("submitbutton").innerHTML = "Reserve";
+    } else {
+        document.getElementById("submitbutton").innerHTML = "Cancel";
+    }
+
+    const aptText = document.getElementById(item).innerHTML;
+    document.getElementById("mutabletext").innerHTML = aptText + ", " + aptTime + ", " + month + "/" + aptDate;
+    document.getElementById("mutabletext").value = item;
 }
 /* !!!!!!!!!!!!!!!!! */
 
 /* SETUP SCRIPTS */
+function reserve() {
+    //var userInput = document.getElementById()
+    // 
+    const aptSum = document.getElementById("mutabletext").innerHTML;
+    const buttonID = document.getElementById("mutabletext").value;
+    
+    const aptParts = aptSum.split(", ");
+    const aptText = aptParts[0];
+    const aptTime = aptParts[1];
+    const aptDateTime = aptParts[2];
+    const dayMonth = aptDateTime.split("/");
 
+    const aptDetails = document.getElementById("fullname").value;
+
+    // If the slot is unreserved, it is set to the contents of the textbox
+    // Otherwise, the contents are erased
+    if (aptText.includes("-")) {
+        document.getElementById(buttonID).classList.add("aptFull");
+        document.getElementById(buttonID).innerHTML = aptDetails;
+    } else {
+        document.getElementById(buttonID).classList.add("aptEmpty");
+        document.getElementById(buttonID).innerHTML = "-----";
+    }
+
+    document.getElementById("fullname").value = "";
+    document.getElementById("mutabletext").innerHTML = "No Appointment Selected";
+    document.getElementById("submitbutton").innerHTML = "Reserve/Cancel";
+
+    //const aptDate
+    //get date of appointment scheduled
+    //aptValue = document.getElementById("mutabletext").value;
+    //document.getElementById(aptValue).innerHTML = ;
+
+    // const aptTimeAndDay = aptValue.split(" ");
+    // const newName = aptTimeAndDay[0];
+    // const aptname = timeKeeper(newName);
+	
+    //scheduler.reserve(4, timeSlot, aptName);
+}
 
 // function setHeaderDates {
-//     const today = new Date();
+//     
 // }
 
-// function setButtonCharacteristics() {
-//     const itemID;
-//     fetch('savedSession.json');
-
-
-//     for (let i = 1, i <= 7, i++) {
-//         for (let j = 1, j <= 17, j++) {
-//             itemID = i + " " + j;
-//             document.getElementById(itemID).innerHTML = ;
-//             //set innerhtml of button
-//         }
-//     }
-// }
+//  function setButtonCharacteristics() {
+//      const buttonID;
+//      const timeValueText;
+//      const aptDescription;
+//      // fetch('savedSession.json');
+//      for (let i = 1, i <= 7, i++) {
+//          for (let j = 0, j <= 16, j++) {
+// 			 timeValueText = timeKeeper(j);
+// 			 aptDescription = scheduler.getAvailabilityText(j, timeValueText);
+//              buttonID = i + " " + j;
+//              document.getElementById(buttonID).innerHTML = aptDescription;
+//              //set innerhtml of button
+//          }
+//      }
+//  }
 
 /* FUNCTIONAL SCRIPTS */
 // function reserveOrCancel() {
@@ -135,14 +249,7 @@ function tempClick(item) {
 //     } 
 // }
 
-function reserve() {
-    const aptName = document.getElementById("fullname").innerHTML;
-    const timeSlot = document.getElementById("mutabletext").innerHTML;
-    //get date of appointment scheduled
 
-    scheduler.reserve(4, timeSlot, aptName);
-
-}
 
 
 
@@ -151,20 +258,20 @@ function reserve() {
 
 </head>
 
-<body>
+<body onload="pageSetup()">
 
 <h1>display: grid</h1>
 <p>Use display: grid; to make a block-level grid container:</p>
 
 <div id="grid" class="week-container">
-    <div class="grid-item dayoftheweek">EMPTY</div>
-    <div class="grid-item dayoftheweek">Day1</div>
-    <div class="grid-item dayoftheweek">Day2</div>
-    <div class="grid-item dayoftheweek">Day3</div>
-    <div class="grid-item dayoftheweek">Day4</div>
-    <div class="grid-item dayoftheweek">Day5</div>
-    <div class="grid-item dayoftheweek">Day6</div>
-    <div class="grid-item dayoftheweek">Day7</div>
+    <div class="grid-item dayoftheweek">Time</div>
+    <div class="grid-item dayoftheweek" id="day1"></div>
+    <div class="grid-item dayoftheweek" id="day2"></div>
+    <div class="grid-item dayoftheweek" id="day3"></div>
+    <div class="grid-item dayoftheweek" id="day4"></div>
+    <div class="grid-item dayoftheweek" id="day5"></div>
+    <div class="grid-item dayoftheweek" id="day6"></div>
+    <div class="grid-item dayoftheweek" id="day7"></div>
 
     <!-- 9:00 AM -->
     <div class="grid-item timeTable">9:00 AM</div>
@@ -195,7 +302,7 @@ function reserve() {
     <div class="grid-item timeTable">9:30 AM</div>
     <!-- button id = "time + day"-->
     <div class="grid-item timeslot">
-        <button class="btn timeButton" id="1 0" onclick="tempClick(this.id)">UNAVAILABLE</button>
+        <button class="btn timeButton" id="1 0" onclick="tempClick(this.id)"></button>
     </div>
     <div class="grid-item timeslot">
         <button class="btn timeButton" id="1 1" onclick="tempClick(this.id)"></button>
@@ -600,13 +707,13 @@ function reserve() {
       <form action="#" method="POST">
         
           <fieldset>
-            <p id="mutabletext">Hello</p>
+            <p id="mutabletext"></p>
               <div class="form-body">
                   <h1 class="form-title text-center" id="AppointmentTime"></h1>
 
                   <div class="form-group">
                       <input class="form-control" type="text" id="fullname" 
-                          name="fullname" placeholder="Full Name">
+                          name="fullname" placeholder="Full Name" value="">
                   </div>
 
                   <!-- <div class="form-group">
@@ -616,7 +723,7 @@ function reserve() {
 
 
                   <div class="form-group text-center">
-                      <button class="btn btn-default btn-lg" type="button" onclick="reserve();">Set Appointment</button>
+                      <button class="btn btn-default btn-lg" type="button" id="submitbutton" onclick="reserve();">Reserve/Cancel</button>
                   </div>
               </div>
           </fieldset>
