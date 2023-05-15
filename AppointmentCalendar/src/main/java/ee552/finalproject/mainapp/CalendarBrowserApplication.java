@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 
@@ -37,7 +37,8 @@ public class CalendarBrowserApplication extends Application
         Browser browser = engine.newBrowser();
 
         // Load the required web page.
-        browser.navigation().loadUrl("WeekGrid.html");
+        String filePathHTML = System.getProperty("user.dir") + "/src/main/java/ee552/finalproject/frontend/WeekGrid.html";
+        browser.navigation().loadUrl("file://" + filePathHTML);
 
         // Create and embed JavaFX BrowserView component to display web content.
         BrowserView view = BrowserView.newInstance( browser );
