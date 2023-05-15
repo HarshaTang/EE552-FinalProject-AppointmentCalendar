@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ 
+.week-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(18, 1fr);
+  background-color: rgba(9, 255, 0, 0.0);
+  padding: 5px;
+  align-content: space-evenly;
+}
+
+.main-form {
+  width: 360px;
+  min-height: 360px;
+  background: #fff;
+  border-radius: 60px;
+  margin:0px auto 20px;
+  padding: 20px;
+}
+
+.grid-item {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 1px solid rgba(0, 0, 0, 0.0);
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.dayoftheweek {
+  background-color: rgba(255, 136, 0, 0.2);
+  font-size: 20px;
+}
+
+.timeTable {
+
+}
+
+/* text field styles */
+body{
+  font:12px/15px Roboto, "Helvetica Neue", Helvetica, sans-serif;
+}
+select,
+input,
+.btn {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  border-radius: 5%;
+  border: none;
+  transition-duration: 0.4s;
+}
+
+.timeButton {
+  text-align: center;
+  display: inline-block;
+  align-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  padding: 10px 0px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  border: none;
+}
+
+.timeButton:hover {
+    background-color: rgba(145, 255, 255, 0.8);
+}
+
+#wrapper{
+  margin:0 auto;
+}
+.main-form {
+  width: 360px;
+  min-height: 360px;
+  background: #fff;
+  border-radius: 60px;
+  margin:0px auto 20px;
+  padding: 20px;
+}
+.form-logo {
+  font-size: 100px;
+  color: #708090;
+}
+/*
+*/
+</style>
+<script>
+
+/* ESSENTIAL SCRIPTS */
+function timeKeeper(input) {
+    const timeValues = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", 
+    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", ]
+    return timeValues[input];
+}
+
+function tempClick(item) {
+    // const buttonName = item;
+    const timeandday = item.split(" ");
+    const newName = timeandday[0];
+    const aptname = timeKeeper(newName);
+    document.getElementById("mutabletext").innerHTML = aptname;
+}
+/* !!!!!!!!!!!!!!!!! */
+
+/* SETUP SCRIPTS */
+
+
+// function setHeaderDates {
+//     const today = new Date();
+// }
+
+// function setButtonCharacteristics() {
+//     const itemID;
+//     fetch('savedSession.json');
+
+
+//     for (let i = 1, i <= 7, i++) {
+//         for (let j = 1, j <= 17, j++) {
+//             itemID = i + " " + j;
+//             document.getElementById(itemID).innerHTML = ;
+//             //set innerhtml of button
+//         }
+//     }
+// }
+
+/* FUNCTIONAL SCRIPTS */
+// function reserveOrCancel() {
+//     const aptName = document.getElementById("mutabletext").innerHTML;
+//     const timeSlot = document.getElementById("mutabletext").innerHTML;
+//     //get date of appointment scheduled
+//     if (aptName = "???") {
+//         scheduler.reserve(date???, timeSlot, aptName);
+//     } else {
+//         scheduler.removeAppointment(date???, "9:30 AM");
+//     } 
+// }
+
+function reserve() {
+    const aptName = document.getElementById("fullname").innerHTML;
+    const timeSlot = document.getElementById("mutabletext").innerHTML;
+    //get date of appointment scheduled
+
+    scheduler.reserve(4, timeSlot, aptName);
+
+}
+
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<h1>display: grid</h1>
+<p>Use display: grid; to make a block-level grid container:</p>
+
+<div id="grid" class="week-container">
+    <div class="grid-item dayoftheweek">EMPTY</div>
+    <div class="grid-item dayoftheweek">Day1</div>
+    <div class="grid-item dayoftheweek">Day2</div>
+    <div class="grid-item dayoftheweek">Day3</div>
+    <div class="grid-item dayoftheweek">Day4</div>
+    <div class="grid-item dayoftheweek">Day5</div>
+    <div class="grid-item dayoftheweek">Day6</div>
+    <div class="grid-item dayoftheweek">Day7</div>
+
+    <!-- 9:00 AM -->
+    <div class="grid-item timeTable">9:00 AM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="0 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="0 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="0 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="0 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="0 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="0 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="0 6" onclick="tempClick(this.id)"></button>
+    </div>
+
+    <!-- 9:30 AM -->
+    <div class="grid-item timeTable">9:30 AM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="1 0" onclick="tempClick(this.id)">UNAVAILABLE</button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="1 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="1 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="1 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="1 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="1 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="1 6" onclick="tempClick(this.id)"></button>
+    </div>
+
+    <!-- 10:00 AM -->
+    <div class="grid-item timeTable">10:00 AM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="2 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="2 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="2 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="2 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="2 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="2 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="2 6" onclick="tempClick(this.id)"></button>
+    </div>    
+
+    <!-- 10:30 AM -->
+    <div class="grid-item timeTable">10:30 AM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="3 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="3 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="3 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="3 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="3 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="3 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="3 6" onclick="tempClick(this.id)"></button>
+    </div>    
+
+    <!-- 11:00 AM -->
+    <div class="grid-item timeTable">11:00 AM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="4 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="4 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="4 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="4 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="4 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="4 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="4 6" onclick="tempClick(this.id)"></button>
+    </div>
+
+    <!-- 11:30 AM -->
+    <div class="grid-item timeTable">11:30 AM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="5 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="5 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="5 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="5 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="5 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="5 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="5 6" onclick="tempClick(this.id)"></button>
+    </div>
+    
+    <!-- 12:00 AM -->
+    <div class="grid-item timeTable">12:00 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="6 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="6 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="6 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="6 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="6 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="6 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="6 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 12:30 PM -->
+    <div class="grid-item timeTable">12:30 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="7 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="7 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="7 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="7 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="7 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="7 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="7 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 1:00 PM -->
+    <div class="grid-item timeTable">1:00 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="8 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="8 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="8 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="8 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="8 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="8 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="8 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 1:30 PM -->
+    <div class="grid-item timeTable">1:30 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="9 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="9 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="9 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="9 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="9 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="9 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="9 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 2:00 PM -->
+    <div class="grid-item timeTable">2:00 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="10 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="10 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="10 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="10 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="10 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="10 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="10 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 2:30 PM -->
+    <div class="grid-item timeTable">2:30 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="11 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="11 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="11 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="11 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="11 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="11 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="11 6" onclick="tempClick(this.id)"></button>
+    </div>
+
+    <!-- 3:00 PM -->
+    <div class="grid-item timeTable">3:00 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="12 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="12 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="12 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="12 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="12 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="12 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="12 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 3:30 PM -->
+    <div class="grid-item timeTable">3:30 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="13 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="13 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="13 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="13 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="13 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="13 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="13 6" onclick="tempClick(this.id)"></button>
+    </div>
+
+    <!-- 4:00 PM -->
+    <div class="grid-item timeTable">4:00 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="14 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="14 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="14 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="14 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="14 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="14 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="14 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 4:30 PM -->
+    <div class="grid-item timeTable">4:30 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="15 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="15 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="15 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="15 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="15 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="15 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="15 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+    <!-- 5:00 PM -->
+    <div class="grid-item timeTable">5:00 PM</div>
+    <!-- button id = "time + day"-->
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="16 0" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="16 1" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="16 2" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="16 3" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="16 4" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="16 5" onclick="tempClick(this.id)"></button>
+    </div>
+    <div class="grid-item timeslot">
+        <button class="btn timeButton" id="16 6" onclick="tempClick(this.id)"></button>
+    </div>  
+
+</div>
+
+<div id="wrapper">
+  
+  <div class="main-form">
+    
+      <form action="#" method="POST">
+        
+          <fieldset>
+            <p id="mutabletext">Hello</p>
+              <div class="form-body">
+                  <h1 class="form-title text-center" id="AppointmentTime"></h1>
+
+                  <div class="form-group">
+                      <input class="form-control" type="text" id="fullname" 
+                          name="fullname" placeholder="Full Name">
+                  </div>
+
+                  <!-- <div class="form-group">
+                    <input class="form-control" type="text" id="lastname" 
+                        name="surname" placeholder="FULL NAME">
+                  </div> -->
+
+
+                  <div class="form-group text-center">
+                      <button class="btn btn-default btn-lg" type="button" onclick="reserve();">Set Appointment</button>
+                  </div>
+              </div>
+          </fieldset>
+      </form>
+  </div>
+</div>
+
+</body>
+</html>
+
+

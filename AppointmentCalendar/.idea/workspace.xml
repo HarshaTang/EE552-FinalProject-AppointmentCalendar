@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="98b4593e-b4be-49ef-be90-fb3efceab9f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ee552/finalproject/mainapp/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/savedSession.json" beforeDir="false" afterPath="$PROJECT_DIR$/savedSession.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/CalendarBrowserApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ee552/finalproject/mainapp/CalendarBrowserApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +38,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Hashi\8. School &amp; Jobs\5. Stevens Online - Second M.S. Degree\coding_stash_551_552\552_Java\Final-Project\EE552-FinalProject-AppointmentCalendar\AppointmentCalendar\src\main\java\ee552\finalproject\frontend" />
+      <recent name="F:\Hashi\8. School &amp; Jobs\5. Stevens Online - Second M.S. Degree\coding_stash_551_552\552_Java\Final-Project\EE552-FinalProject-AppointmentCalendar\AppointmentCalendar" />
+      <recent name="F:\Hashi\8. School &amp; Jobs\5. Stevens Online - Second M.S. Degree\coding_stash_551_552\552_Java\Final-Project\EE552-FinalProject-AppointmentCalendar\AppointmentCalendar\src\main\resources" />
+      <recent name="F:\Hashi\8. School &amp; Jobs\5. Stevens Online - Second M.S. Degree\coding_stash_551_552\552_Java\Final-Project\EE552-FinalProject-AppointmentCalendar\AppointmentCalendar\src\main\java\ee552\finalproject\mainapp" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.CalendarBrowserApplication">
     <configuration name="AppointmentCalendarConsoleMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ee552.finalproject.mainapp.AppointmentCalendarConsoleMain" />
@@ -65,9 +73,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AppointmentSchedulerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AppointmentCalendar" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="junit_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="junit_tests" />
+      <option name="MAIN_CLASS_NAME" value="junit_tests.AppointmentSchedulerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.CalendarBrowserApplication" />
+        <item itemvalue="JUnit.AppointmentSchedulerTest" />
         <item itemvalue="Application.AppointmentCalendarConsoleMain" />
       </list>
     </recent_temporary>

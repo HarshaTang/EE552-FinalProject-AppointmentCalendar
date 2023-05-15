@@ -37,7 +37,7 @@ public class CalendarBrowserApplication extends Application
         Browser browser = engine.newBrowser();
 
         // Load the required web page.
-        browser.navigation().loadUrl( "https://google.com" );
+        browser.navigation().loadUrl("WeekGrid.html");
 
         // Create and embed JavaFX BrowserView component to display web content.
         BrowserView view = BrowserView.newInstance( browser );
