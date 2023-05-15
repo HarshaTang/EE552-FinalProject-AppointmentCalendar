@@ -93,13 +93,13 @@ input,
 */
 </style>
 <script>
+function timeKeeper(input) {
+    const timeValues = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
+    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", ]
+    return timeValues[input];
+}
 
-/* ESSENTIAL SCRIPTS */
 
-// for (let k = 0; k < 7; k++) {
-//     const dateHeaderID = "day" + (k+1);
-//     document.getElementById(dateHeaderID).innerHTML = today;
-// }
 
 function pageSetup() {
     // Get full details of today's date
@@ -119,9 +119,15 @@ function pageSetup() {
     // Sets default text for buttons
     for (let i = 0; i < 17; i++) {
         for (let j = 0; j < 7; j++) {
-            document.getElementById(i + " " + j).innerHTML = "-----";
-            document.getElementById(i + " " + j).classList.add("aptAvailable");
-            
+            const newDay = currentDay + j;
+            const dayID = i + " " + j;
+            if (AppointmentScheduler.getAvailabilityStatus(newDay, timeKeeper(newDay)) = true){
+                document.getElementById(dayID).innerHTML = "-----";
+                document.getElementById(dayID).classList.add("aptAvailable");
+            } else {
+                document.getElementById(dayID).innerHTML = AppointmentScheduler.getAvailabilityText(newDay, timeKeeper(newDay));
+                document.getElementById(dayID).classList.add("aptFull");
+            }    
         }
     }
 
@@ -129,30 +135,9 @@ function pageSetup() {
     document.getElementById("fullname").value = "";
 
     document.getElementById("mutabletext").innerHTML = "No Appointment Selected";
-    // Set up text for buttons
-
-    //  const buttonID;
-    //  const timeValueText;
-    //  const aptDescription;
-    // fetch('savedSession.json');
-    //  for (let i = 1, i <= 7, i++) {
-    //      for (let j = 0, j <= 16, j++) {
-	// 		 timeValueText = timeKeeper(j);
-	// 		 aptDescription = scheduler.getAvailabilityText(j, timeValueText);
-    //          buttonID = i + " " + j;
-    //          document.getElementById(buttonID).innerHTML = aptDescription;
-    //          //set innerhtml of button
-    //      }
-    //  }
-
 }
 
 
-function timeKeeper(input) {
-    const timeValues = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", 
-    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", ]
-    return timeValues[input];
-}
 
 function tempClick(item) {
     // Time Slot + Date#
@@ -174,85 +159,45 @@ function tempClick(item) {
     document.getElementById("mutabletext").innerHTML = aptText + ", " + aptTime + ", " + month + "/" + aptDate;
     document.getElementById("mutabletext").value = item;
 }
-/* !!!!!!!!!!!!!!!!! */
 
-/* SETUP SCRIPTS */
+
+
 function reserve() {
-    //var userInput = document.getElementById()
-    // 
+
+    // Grabs all of text box displaying appointment information
     const aptSum = document.getElementById("mutabletext").innerHTML;
+
+    // Grabs the ID of the last button pressed
     const buttonID = document.getElementById("mutabletext").value;
     
+    // Splits up text into usable parameters
     const aptParts = aptSum.split(", ");
     const aptText = aptParts[0];
     const aptTime = aptParts[1];
     const aptDateTime = aptParts[2];
-    const dayMonth = aptDateTime.split("/");
+    const monthDay = aptDateTime.split("/");
 
+    // Grabs text input
     const aptDetails = document.getElementById("fullname").value;
 
-    // If the slot is unreserved, it is set to the contents of the textbox
-    // Otherwise, the contents are erased
+    // Changes whether appointment is reserved or canceled based on text of slot selected
     if (aptText.includes("-")) {
+        AppointmentScheduler.reserve(monthDay[0], monthDay[1], aptDetails);
         document.getElementById(buttonID).classList.add("aptFull");
         document.getElementById(buttonID).innerHTML = aptDetails;
     } else {
+        AppointmentScheduler.removeAppointment(monthDay[0], monthDay[1]);
         document.getElementById(buttonID).classList.add("aptEmpty");
         document.getElementById(buttonID).innerHTML = "-----";
     }
 
+    // Zeroes appointment submission fields
     document.getElementById("fullname").value = "";
     document.getElementById("mutabletext").innerHTML = "No Appointment Selected";
     document.getElementById("submitbutton").innerHTML = "Reserve/Cancel";
 
-    //const aptDate
-    //get date of appointment scheduled
-    //aptValue = document.getElementById("mutabletext").value;
-    //document.getElementById(aptValue).innerHTML = ;
 
-    // const aptTimeAndDay = aptValue.split(" ");
-    // const newName = aptTimeAndDay[0];
-    // const aptname = timeKeeper(newName);
-	
-    //scheduler.reserve(4, timeSlot, aptName);
 }
-
-// function setHeaderDates {
-//     
-// }
-
-//  function setButtonCharacteristics() {
-//      const buttonID;
-//      const timeValueText;
-//      const aptDescription;
-//      // fetch('savedSession.json');
-//      for (let i = 1, i <= 7, i++) {
-//          for (let j = 0, j <= 16, j++) {
-// 			 timeValueText = timeKeeper(j);
-// 			 aptDescription = scheduler.getAvailabilityText(j, timeValueText);
-//              buttonID = i + " " + j;
-//              document.getElementById(buttonID).innerHTML = aptDescription;
-//              //set innerhtml of button
-//          }
-//      }
-//  }
-
-/* FUNCTIONAL SCRIPTS */
-// function reserveOrCancel() {
-//     const aptName = document.getElementById("mutabletext").innerHTML;
-//     const timeSlot = document.getElementById("mutabletext").innerHTML;
-//     //get date of appointment scheduled
-//     if (aptName = "???") {
-//         scheduler.reserve(date???, timeSlot, aptName);
-//     } else {
-//         scheduler.removeAppointment(date???, "9:30 AM");
-//     } 
-// }
-
-
-
-
-
 
 </script>
 
