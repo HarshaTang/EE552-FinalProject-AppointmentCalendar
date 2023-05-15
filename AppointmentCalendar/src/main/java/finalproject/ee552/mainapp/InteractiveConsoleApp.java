@@ -9,6 +9,11 @@ import finalproject.ee552.backend.AppointmentScheduler;
 import finalproject.ee552.backend.ConsoleDisplayCalendarView;
 import finalproject.ee552.backend.JSONCalendar;
 
+/* class: Interactive Console App
+ * Description: The purpose of this class is to create an interactive console experience with the calendar application 
+ * It prompts questions and you can type answers in the console window in Eclipse or Intellij, and it will accept your requests
+ * And display values accordingly
+ */
 public class InteractiveConsoleApp {
 	
 	private int barSize = 75;
@@ -28,6 +33,10 @@ public class InteractiveConsoleApp {
 	
 	private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("h:mm a");
 	
+	/* class constructor: InteractiveConsoleApp
+	 * Description: This sets up a lot of the messages that will be used by the interactive program. 
+	 * It also sets up the JSONCalendar and the AppointmentCalendar object. 
+	 */
 	private InteractiveConsoleApp(int aYear, int aMonth) {
 		this.year = aYear;
 		this.month = aMonth;
@@ -48,10 +57,13 @@ public class InteractiveConsoleApp {
 		 */
 		this.scheduler = new AppointmentScheduler(this.year, this.month);
 		scheduler.populateDataFromJSON(jsonData);  // populate the scheduler with JSON data
-		
-		
 	}
 	
+	/*  @Function: getExitMessage
+	 *  @param: none
+	 *  @return: String - To String printout
+	 *  @description: returns a string value to exit out of the program neatly
+	 */
 	private String getExitMessage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("=".repeat(barSize)).append("\n");
@@ -61,6 +73,11 @@ public class InteractiveConsoleApp {
 		return sb.toString();
 	}
 	
+	/*  @Function: getIntroductionOptions
+	 *  @param: none
+	 *  @return: String - To String printout
+	 *  @description: returns a string value to introduce the program to the user
+	 */
 	private String getIntroductionOptions() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("=".repeat(barSize)).append("\n");
@@ -74,6 +91,11 @@ public class InteractiveConsoleApp {
 		return sb.toString();
 	}
 	
+	/*  @Function: getCalendarOptions
+	 *  @param: none
+	 *  @return: String - To String printout
+	 *  @description: returns a string value to present all the options that the user can choose from
+	 */
 	private String getCalendarOptions() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("=".repeat(barSize)).append("\n");
@@ -93,6 +115,12 @@ public class InteractiveConsoleApp {
 		return sb.toString();
 	}
 	
+	/*  @Function: getDayInput
+	 *  @param: none
+	 *  @return: int - day input value
+	 *  @description: returns an integer value from the user's input. 
+	 *  This code handles any errors made by the user. It also won't stop until the user stops to interact with it. 
+	 */
 	private int getDayInput() {
 		input = new Scanner(System.in);
 		String profChoice = "-1";
@@ -123,6 +151,11 @@ public class InteractiveConsoleApp {
 		return 0;
 	}
 	
+	/*  @Function: checkTimeInput
+	 *  @param: String inputVal
+	 *  @return: boolean - true/false
+	 *  @description: Checks to see if the user entered a valid time entry with the correct format. 
+	 */
 	private boolean checkTimeInput(String inputVal) {
 		try {
 			LocalTime.parse(inputVal, dateFormat);
@@ -132,6 +165,12 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: getTimeInput
+	 *  @param: none
+	 *  @return: String - time input value
+	 *  @description: returns a string value in the correct format from the user.
+	 *  This code handles any errors made by the user. It also won't stop until the user stops to interact with it. 
+	 */
 	private String getTimeInput() {
 		input = new Scanner(System.in);
 		String profChoice = "-1";
@@ -153,6 +192,11 @@ public class InteractiveConsoleApp {
 		return null;
 	}
 	
+	/*  @Function: getStringInput
+	 *  @param: none
+	 *  @return: String - text input value
+	 *  @description: returns a string text value in the correct format from the user.
+	 */
 	private String getStringInput() {
 		input = new Scanner(System.in);
 		
@@ -166,6 +210,12 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: makeReservationLogic
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for making reservations.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
 	private void makeReservationLogic() {
 		System.out.println("Professor Chose Option 1: Make Reservation");
 		int daychoice = getDayInput();
@@ -200,6 +250,12 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: cancelReservationLogic
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for cancelling reservations.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
 	private void cancelReservationLogic() {
 		System.out.println("Professor Chose Option 2: Cancel Reservation");
 		int daychoice = getDayInput();
@@ -227,6 +283,12 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: checkTimeSlotsStatus
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for checking availability status of a time slot.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
 	private void checkTimeSlotsStatus() { 
 		System.out.println("Professor Chose Option 3: Check Time-Slot Availability Status");
 		int daychoice = getDayInput();
@@ -245,6 +307,12 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: checkAvailableSlotsInDay
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for checking the total available time slots for a given day.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
 	private void checkAvailableSlotsInDay() {
 		System.out.println("Professor Chose Option 4: Total Available Slots on a Particular Day");
 		int daychoice = getDayInput();
@@ -262,6 +330,12 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: displayScheduleInDay
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for checking a schedule for a particular day.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
 	private void displayScheduleInDay() {
 		System.out.println("Professor Chose Option 5: Check Schedule on a Particular Day");
 		int daychoice = getDayInput();
@@ -273,6 +347,12 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: viewSevenDayCalendar
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for checking a schedule for the next 7 days, based on initial day input.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
 	private void viewSevenDayCalendar() {
 		System.out.println("Professor Chose Option 6: View 7-Day Calendar");
 		int daychoice = getDayInput();
@@ -285,12 +365,23 @@ public class InteractiveConsoleApp {
 		}
 	}
 	
+	/*  @Function: saveSchedulerToJSON
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for saving the current calendar to JSON file.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
 	private void saveSchedulerToJSON () { 
 		System.out.println("Professor Chose Option 7: Save Current Calendar to JSON File");
 		jsonData.write(this.scheduler, "savedSession.json");
 		System.out.println("\nSuccess! Finished writing current session to savedSession.json File!");
 	}
 	
+	/*  @Function: runProfessorCalendar
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the entire interactive application for the appointment-calendar for the professor.
+	 */
 	private void runProfessorCalendar() {
 		input = new Scanner(System.in);
 
@@ -342,6 +433,10 @@ public class InteractiveConsoleApp {
 		
 	}
 	
+	/*  main function
+	 *  @description: handles the appointment calendar interactive loops and choices.
+	 *  As of right now the student calendar is not available for this project due to time limitations
+	 */
 	public static void main(String[] args) {
 		InteractiveConsoleApp app = new InteractiveConsoleApp(2023, 4);  // april of 2023
 		Scanner sc = new Scanner(System.in);
