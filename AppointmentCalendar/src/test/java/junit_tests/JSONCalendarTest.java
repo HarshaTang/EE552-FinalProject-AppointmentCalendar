@@ -1,21 +1,21 @@
 package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import ee552.finalproject.backend.AppointmentScheduler;
-import ee552.finalproject.backend.JSONCalendar;
+import finalproject.ee552.backend.AppointmentScheduler;
+import finalproject.ee552.backend.JSONCalendar;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class JSONCalendarTest {
+class JSONCalendarTest {
     // Write some tests here
 	
 	private JSONCalendar jsonData;
 	private AppointmentScheduler scheduler;
 	
 	@BeforeEach
-	public void beforeEachTestMethods() {
+	void beforeEachTestMethods() {
 		/** ================================================
 		 * 	Set-Up the JSON Reader
 		 *  ================================================

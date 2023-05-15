@@ -1,7 +1,7 @@
 package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import ee552.finalproject.backend.AvailabilityWindow;
+import finalproject.ee552.backend.AvailabilityWindow;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 
@@ -9,13 +9,13 @@ import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class AvailabilityWindowTest {
+class AvailabilityWindowTest {
     // Write some tests here
 	
 	private AvailabilityWindow testAvailWindow;
 	
 	@BeforeEach
-	public void beforeEachTestMethods() { 
+	void beforeEachTestMethods() {
 		testAvailWindow = new AvailabilityWindow(LocalTime.of(9, 0), LocalTime.of(17, 30));
 	}
 	

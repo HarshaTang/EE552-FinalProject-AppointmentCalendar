@@ -2,18 +2,18 @@ package junit_tests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import ee552.finalproject.backend.AppointmentScheduler;
+import finalproject.ee552.backend.AppointmentScheduler;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 
 import java.time.LocalTime;
 
-public class AppointmentSchedulerTest {
+class AppointmentSchedulerTest {
     // Write some tests here
 	private AppointmentScheduler scheduler;
 	
 	@BeforeEach
-	public void beforeEachTestMethods() { 
+	void beforeEachTestMethods() {
 		// need to initialize with a year and month, and a start/end time
 		LocalTime startTime = LocalTime.of(9, 0);
 		LocalTime endTime   = LocalTime.of(17, 30);
@@ -21,7 +21,7 @@ public class AppointmentSchedulerTest {
 	}
 	
 	@Test
-	public void canReserveSlots() {
+	void canReserveSlots() {
 		// Can reserve successfully
 		boolean canReserve = scheduler.reserve(1, "9:45 AM", null);
 		assertEquals(true, canReserve);
@@ -36,7 +36,7 @@ public class AppointmentSchedulerTest {
 	}
 	
 	@Test
-	public void canGetNumberOfAvailableSlots() {
+	void canGetNumberOfAvailableSlots() {
 		// get the number of slots
 		assertEquals(17, scheduler.getNumberOfAvailableSlots(1));
 		
@@ -55,7 +55,7 @@ public class AppointmentSchedulerTest {
 	}
 	
 	@Test
-	public void canCancelAppointments() {
+	void canCancelAppointments() {
 		// reserve a slot
 		scheduler.reserve(1, "10:00 AM", null);
 		

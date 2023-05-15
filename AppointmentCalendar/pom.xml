@@ -6,7 +6,7 @@
 
     <groupId>AppointmentCalendar</groupId>
     <artifactId>AppointmentCalendar</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>6.0</version>
     <name>AppointmentCalendar</name>
     <url>https://github.com/HarshaTang/EE552-FinalProject-AppointmentCalendar</url>
 
@@ -107,7 +107,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ee552.finalproject.mainapp/ee552.finalproject.mainapp.CalendarBrowserApplication</mainClass>
+                            <mainClass>finalproject.ee552.mainapp/finalproject.ee552.mainapp.CalendarBrowserApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

@@ -1,6 +1,6 @@
-module ee552.finalproject.mainapp {
+module finalproject.ee552.mainapp {
     requires javafx.controls;
-    //requires javafx.fxml;
+    //requires javafx.fxml
     requires jxbrowser;
     requires jxbrowser.javafx;
 
@@ -8,8 +8,8 @@ module ee552.finalproject.mainapp {
     requires org.apache.commons.lang3;
     requires json.simple;
 
-    //opens ee552.finalproject.mainapp to javafx.fxml;
-    exports ee552.finalproject.mainapp;
+    //opens finalproject.ee552.mainapp to javafx.fxml
+    exports finalproject.ee552.mainapp;
 
     // Extra Configurations to save for later ... if needed
     //--add-opens javafx.swing/javafx.embed.swing=jxbrowser

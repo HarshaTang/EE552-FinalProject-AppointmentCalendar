@@ -1,7 +1,7 @@
 package junit_tests;
 import org.junit.jupiter.api.Test;	// used for testing
 
-import ee552.finalproject.backend.MonthlyCalendarApp;
+import finalproject.ee552.backend.MonthlyCalendarApp;
 
 import static org.junit.jupiter.api.Assertions.*;	// for assertions
 
@@ -12,13 +12,13 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class MonthlyCalendarAppTest {
+class MonthlyCalendarAppTest {
     // Write some tests here
 	
 	private MonthlyCalendarApp sampleCalendar;
 	
 	@BeforeEach
-	public void beforeEachTestMethods() { 
+	void beforeEachTestMethods() {
 		sampleCalendar = new MonthlyCalendarApp(2023, 4);
 	}
 	
