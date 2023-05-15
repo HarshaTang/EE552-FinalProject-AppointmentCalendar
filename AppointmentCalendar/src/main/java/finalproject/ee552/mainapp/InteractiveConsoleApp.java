@@ -111,6 +111,7 @@ public class InteractiveConsoleApp {
 		sb.append("5. Check Schedule on a Particular Day").append("\n");
 		sb.append("6. View 7-Day Calendar").append("\n");
 		sb.append("7. Save Current Calendar to JSON File").append("\n");
+		sb.append("8. Display Monthly Calendar").append("\n");
 		
 		return sb.toString();
 	}
@@ -224,11 +225,11 @@ public class InteractiveConsoleApp {
 		System.out.println("textchoice: " + textChoice);
 		
 		if ( (daychoice != 0) && (timeChoice != null) ) {
-			sbProf = new StringBuilder();
+			this.sbProf = new StringBuilder();
 			
 			String textChoiceText = "";
 			
-			sbProf.append("\nYour Request to Reserve an Appointment for your chosen (DAY, TIME) of ")
+			this.sbProf.append("\nYour Request to Reserve an Appointment for your chosen (DAY, TIME) of ")
 			.append("(").append(daychoice).append(", ").append(timeChoice).append(")");
 			
 			if (textChoice == null) {
@@ -239,12 +240,12 @@ public class InteractiveConsoleApp {
 			}
 			
 			if (Boolean.TRUE.equals(this.scheduler.reserve(daychoice, timeChoice, textChoice))) {
-				sbProf.append(" is a Success!").append("\n")
+				this.sbProf.append(" is a Success!").append("\n")
 				.append("An appointment has been made with a text-value as '").append(textChoiceText).append("!");
 			} else {
-				sbProf.append(" Failed! The Slot is already Taken!");
+				this.sbProf.append(" Failed! The Slot is already Taken!");
 			}
-			System.out.println(sbProf.toString());
+			System.out.println(this.sbProf.toString());
 		} else {
 			System.out.println("You chose not to Make Reservation!");
 		}
@@ -262,22 +263,22 @@ public class InteractiveConsoleApp {
 		String timeChoice = getTimeInput();
 		
 		if ( (daychoice != 0) && (timeChoice != null) ) {
-			sbProf = new StringBuilder();
+			this.sbProf = new StringBuilder();
 			
 			String prevText = this.scheduler.getAvailabilityText(daychoice, timeChoice);
 			
-			sbProf.append("\nYour Request to Cancel an Appointment for your chosen (DAY, TIME) of ")
+			this.sbProf.append("\nYour Request to Cancel an Appointment for your chosen (DAY, TIME) of ")
 			.append("(").append(daychoice).append(", ").append(timeChoice).append(")");
 			
 			if (Boolean.TRUE.equals(this.scheduler.removeAppointment(daychoice, timeChoice))) {
-				sbProf.append(" for ")
+				this.sbProf.append(" for ")
 				.append(prevText)
 				.append(" is a Success! It has been Cancelled!");
 			} else {
-				sbProf.append(" Failed! The Slot is already Available!");
+				this.sbProf.append(" Failed! The Slot is already Available!");
 			}
 			
-			System.out.println(sbProf.toString());
+			System.out.println(this.sbProf.toString());
 		} else {
 			System.out.println("You chose not to Cancel Reservation!");
 		}
@@ -295,13 +296,13 @@ public class InteractiveConsoleApp {
 		String timeChoice = getTimeInput();
 		
 		if ( (daychoice != 0) && (timeChoice != null) ) {
-			sbProf = new StringBuilder();
+			this.sbProf = new StringBuilder();
 			
-			sbProf.append("\nThe Availability Status for your chosen (DAY, TIME) of ")
+			this.sbProf.append("\nThe Availability Status for your chosen (DAY, TIME) of ")
 			.append("(").append(daychoice).append(", ").append(timeChoice).append(")").append(": ")
 			.append(this.scheduler.getAvailabilityStatus(daychoice, timeChoice));
 			
-			System.out.println(sbProf.toString());
+			System.out.println(this.sbProf.toString());
 		} else {
 			System.out.println("You chose not to Check Time-Slot Availability Status!");
 		}
@@ -318,13 +319,13 @@ public class InteractiveConsoleApp {
 		int daychoice = getDayInput();
 		
 		if ( daychoice != 0 ) {
-			sbProf = new StringBuilder();
+			this.sbProf = new StringBuilder();
 			
-			sbProf.append("\nThe Total Available Slots for your chosen DAY of ")
+			this.sbProf.append("\nThe Total Available Slots for your chosen DAY of ")
 			.append("(").append(daychoice).append(") is: ")
 			.append(this.scheduler.getNumberOfAvailableSlots(daychoice));
 			
-			System.out.println(sbProf.toString());
+			System.out.println(this.sbProf.toString());
 		} else {
 			System.out.println("You chose not to Total Available Slots on a Particular Day!");
 		}
@@ -377,6 +378,21 @@ public class InteractiveConsoleApp {
 		System.out.println("\nSuccess! Finished writing current session to savedSession.json File!");
 	}
 	
+	/*  @Function: displayMonthlyCalendar
+	 *  @param: none
+	 *  @return: none
+	 *  @description: performs the logic for to print out the monthly calendar.
+	 *  This allows for less clutter in runProfessorCalendar() function
+	 */
+	private void displayMonthlyCalendar() { 
+		System.out.println("\nProfessor Chose Option 7: Save Current Calendar to JSON File");
+		this.sbProf = new StringBuilder();
+		
+		this.sbProf.append("Displaying Calendar Layout for ").append(this.scheduler.getYear()).append("/").append(this.scheduler.getMonth());
+		System.out.println(this.sbProf.toString());
+		System.out.println(this.scheduler.displayCalendarLayout());
+	}
+	
 	/*  @Function: runProfessorCalendar
 	 *  @param: none
 	 *  @return: none
@@ -421,6 +437,9 @@ public class InteractiveConsoleApp {
 			// SAVE CURRENT CALENDAR TO JSON FILE
 			else if ("7".equals(profChoice)) {
 				saveSchedulerToJSON();
+			}
+			else if ("8".equals(profChoice)) {
+				displayMonthlyCalendar();
 			}
 			
 			if ("exit".equalsIgnoreCase(profChoice)) {
