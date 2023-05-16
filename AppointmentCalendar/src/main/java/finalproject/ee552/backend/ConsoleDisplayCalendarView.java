@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+/* class: Console Display Calendar View
+ * Description: The purpose of this calendar is to display the 7 day view of the schedule and time slots
+ */
 public class ConsoleDisplayCalendarView {
 	
 	private int timeSpacing = 10;
@@ -14,10 +17,18 @@ public class ConsoleDisplayCalendarView {
 	
 	private AppointmentScheduler scheduler;
 	
+	/* class constructor: ConsoleDisplayCalendarView
+	 * Description: Creates the constructor and sets up the passed in scheduler
+	 */
 	public ConsoleDisplayCalendarView (AppointmentScheduler aScheduler) {
 		this.scheduler = aScheduler;
 	}
 	
+	/*  @Function: generateWeeklyView
+	 *  @param: int - day number
+	 *  @return: String - To String printout
+	 *  @description: calculates the next 7 days based on the current input, and calls the genView function
+	 */
 	public String generateWeeklyView(int startDay) {
 		int newStart = 0;
 		int newEnd = 0;
@@ -44,6 +55,12 @@ public class ConsoleDisplayCalendarView {
 		
 	}
 	
+	/*  @Function: genView
+	 *  @param: int, int - day numbers
+	 *  @return: String - To String printout
+	 *  @description: generates a calendar print out view for the specified time-frame.
+	 *  Organizes the information neatly in a calendar grid
+	 */
 	private String genView (int startDay, int endDay) {
 		StringBuilder sb = new StringBuilder();
 		
@@ -94,8 +111,8 @@ public class ConsoleDisplayCalendarView {
 		return sb.toString();
 	}
 	
+	// sample testing to make sure the display is correctly formatted
 	public static void main(String[] args) {
-		// This is a s
 		JSONCalendar jsonData = new JSONCalendar();
 		jsonData.read("savedSession.json");
 		
@@ -106,6 +123,7 @@ public class ConsoleDisplayCalendarView {
 		
 		ConsoleDisplayCalendarView viewer = new ConsoleDisplayCalendarView(scheduler);
 		
+		// this line generates the calendar display to console for the next 7 days
 		viewer.generateWeeklyView(1);
 	}
 	
