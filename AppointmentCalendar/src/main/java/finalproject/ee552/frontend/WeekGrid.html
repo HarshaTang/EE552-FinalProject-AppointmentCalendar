@@ -197,9 +197,9 @@ function reserve() {
     const aptTime = aptParts[1];
     const aptDateTime = aptParts[2];
     const monthDay = aptDateTime.split("/");
-    console.log(monthDay);
+    // console.log(monthDay);
     const newAptText = document.getElementById("fullname").value;
-    console.log(newAptText);
+    // console.log(newAptText);
     // Grabs text input
     //const aptDetails = document.getElementById("fullname").value;
 
@@ -209,7 +209,7 @@ function reserve() {
         .then(data => {
             //console.log(aptDetails);
             if (aptDetails.includes("-")) {
-                console.log(data);
+                // console.log(data);
                 localStorage.setItem('savedSession', JSON.stringify(data['MONTHS_LIST'][0]['DAYS_IN_MONTH_DICT'][monthDay[1]][aptTime] = newAptText));
                 document.getElementById(buttonID).classList.add("aptFull");
                 document.getElementById(buttonID).innerHTML = newAptText;
