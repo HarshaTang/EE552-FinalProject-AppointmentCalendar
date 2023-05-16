@@ -34,9 +34,9 @@
   font-size: 20px;
 }
 
-.timeTable {
+/* .timeTable {
 
-}
+} */
 
 /* text field styles */
 body{
@@ -92,17 +92,16 @@ input,
 /*
 */
 </style>
-<script>
+<script type="module" src="random.js"></script>
+<script type="text/javascript" >
 function timeKeeper(input) {
-    const timeValues = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
-    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", ]
+    const timeValues = ["09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
+    "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM", ]
     return timeValues[input];
 }
 
 
-
 function pageSetup() {
-    // Get full details of today's date
     const today = new Date();
 
     // Creates variables for specific parts of the day
@@ -110,31 +109,53 @@ function pageSetup() {
     const currentYear = today.getFullYear();
     const month = today.getMonth() // Grabs today's date
 
-    // Sets text for columns based on dates
-    for (let i = 0; i < 7; i++) {
-        const dateHeaderID = "day" + String(i+1);
-        document.getElementById(dateHeaderID).innerHTML = currentDay + i;
-    }
-    
-    // Sets default text for buttons
-    for (let i = 0; i < 17; i++) {
-        for (let j = 0; j < 7; j++) {
-            const newDay = currentDay + j;
-            const dayID = i + " " + j;
-            if (AppointmentScheduler.getAvailabilityStatus(newDay, timeKeeper(newDay)) = true){
-                document.getElementById(dayID).innerHTML = "-----";
-                document.getElementById(dayID).classList.add("aptAvailable");
-            } else {
-                document.getElementById(dayID).innerHTML = AppointmentScheduler.getAvailabilityText(newDay, timeKeeper(newDay));
-                document.getElementById(dayID).classList.add("aptFull");
-            }    
-        }
-    }
+    //var data = JSON.parse(savedSession);
+    // import data from ".\\savedSession.json" assert {type: "json" };
+    //let data = require(".\\savedSession.json");
+    // Get full details of today's date
+    fetch('./savedSession.json')
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data)
 
+        for (let i = 0; i < 7; i++) {
+            const dateHeaderID = "day" + String(i+1);
+            document.getElementById(dateHeaderID).innerHTML = currentDay + i;
+        }
+    
+        let datamonth = data['MONTHS_LIST'][0]['DAYS_IN_MONTH_DICT'];
+        
+        // Sets default text and color for buttons
+        for (let i = 0; i < 17; i++) {
+            for (let j = 0; j < 7; j++) {
+                const timeValue = timeKeeper(i);
+                const newDay = currentDay + j;
+                const dayID = i + " " + j;
+                datafinal = datamonth[newDay][timeValue];
+                document.getElementById(dayID).classList.add("aptAvailable");
+                //datafinal = datamonth[newDay][timeValue];
+                //let tempdata = data.MONTHS_LIST[0].DAYS_IN_MONTH_DICT[newDay][timeValue];
+                //console.log(datamonth);
+                document.getElementById(dayID).innerHTML = datafinal;
+                
+                if (datafinal === "Free"){
+                    document.getElementById(dayID).innerHTML = "-----";
+                    document.getElementById(dayID).classList.add("aptAvailable");
+                } else {
+                    document.getElementById(dayID).innerHTML = datafinal;
+                    document.getElementById(dayID).classList.add("aptFull");
+                }    
+            }
+        }
+
+
+        });
+    
     // Sets default content of text box to empty
     document.getElementById("fullname").value = "";
 
     document.getElementById("mutabletext").innerHTML = "No Appointment Selected";
+
 }
 
 
@@ -172,25 +193,33 @@ function reserve() {
     
     // Splits up text into usable parameters
     const aptParts = aptSum.split(", ");
-    const aptText = aptParts[0];
+    const aptDetails = aptParts[0];
     const aptTime = aptParts[1];
     const aptDateTime = aptParts[2];
     const monthDay = aptDateTime.split("/");
-
+    console.log(monthDay);
+    const newAptText = document.getElementById("fullname").value;
+    console.log(newAptText);
     // Grabs text input
-    const aptDetails = document.getElementById("fullname").value;
+    //const aptDetails = document.getElementById("fullname").value;
 
     // Changes whether appointment is reserved or canceled based on text of slot selected
-    if (aptText.includes("-")) {
-        AppointmentScheduler.reserve(monthDay[0], monthDay[1], aptDetails);
-        document.getElementById(buttonID).classList.add("aptFull");
-        document.getElementById(buttonID).innerHTML = aptDetails;
-    } else {
-        AppointmentScheduler.removeAppointment(monthDay[0], monthDay[1]);
-        document.getElementById(buttonID).classList.add("aptEmpty");
-        document.getElementById(buttonID).innerHTML = "-----";
-    }
-
+    fetch('./savedSession.json')
+        .then(response => response.json())
+        .then(data => {
+            //console.log(aptDetails);
+            if (aptDetails.includes("-")) {
+                console.log(data);
+                localStorage.setItem('savedSession', JSON.stringify(data['MONTHS_LIST'][0]['DAYS_IN_MONTH_DICT'][monthDay[1]][aptTime] = newAptText));
+                document.getElementById(buttonID).classList.add("aptFull");
+                document.getElementById(buttonID).innerHTML = newAptText;
+            } else {
+                JSON.stringify(data['MONTHS_LIST'][0]['DAYS_IN_MONTH_DICT'][monthDay[1]][aptTime]["Free"]);
+                document.getElementById(buttonID).classList.add("aptEmpty");
+                document.getElementById(buttonID).innerHTML = "-----";
+            }
+            
+    });
     // Zeroes appointment submission fields
     document.getElementById("fullname").value = "";
     document.getElementById("mutabletext").innerHTML = "No Appointment Selected";
